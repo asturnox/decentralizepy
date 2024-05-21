@@ -3,7 +3,7 @@ from typing import Tuple
 
 class MobilityNode:
     """
-    This graph defines the node in the graph topology.
+    This class defines the node in the graph topology.
     """
 
     def __init__(self, uid: int, pos_vec: Tuple[float, float], mobility_prob_vec: Tuple[float, float, float, float],
