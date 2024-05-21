@@ -7,6 +7,7 @@ from torch import multiprocessing as mp
 
 from decentralizepy import utils
 from decentralizepy.graphs.Graph import Graph
+from decentralizepy.graphs.MobilityGraph import MobilityGraph
 from decentralizepy.mappings.Linear import Linear
 from decentralizepy.node.DPSGDWithPeerSampler import DPSGDWithPeerSampler
 from decentralizepy.node.PeerSamplerDynamic import PeerSamplerDynamic
@@ -44,8 +45,8 @@ if __name__ == "__main__":
     copy(args.graph_file, args.log_dir)
     utils.write_args(args, args.log_dir)
 
-    g = Graph()
-    g.read_graph_from_file(args.graph_file, args.graph_type)
+    g = MobilityGraph()
+    g.read_graph_from_file(args.graph_file)
     n_machines = args.machines
     procs_per_machine = args.procs_per_machine[0]
     m_id = args.machine_id

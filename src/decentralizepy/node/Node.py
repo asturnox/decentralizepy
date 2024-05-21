@@ -94,12 +94,14 @@ class Node:
 
         """
         wait_acknowledgements = []
+        print("My neighbors (connect_neighbors): ", self.my_neighbors)
         for neighbor in self.my_neighbors:
             if not self.communication.already_connected(neighbor):
                 self.connect_neighbor(neighbor)
                 wait_acknowledgements.append(neighbor)
 
         for neighbor in wait_acknowledgements:
+            print("Waiting for hello from neighbor: ", neighbor)
             self.wait_for_hello(neighbor)
 
     def receive_disconnect(self):
@@ -385,6 +387,7 @@ class Node:
 
         self.barrier = set()
         self.my_neighbors = self.graph.neighbors(self.uid)
+        print("My neighbors (instantiate): ", self.my_neighbors)
 
         self.init_sharing(config["SHARING"])
 

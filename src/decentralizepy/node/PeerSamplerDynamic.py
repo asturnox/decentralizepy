@@ -1,4 +1,5 @@
 import logging
+import os.path
 
 from decentralizepy.graphs.MobilityGraph import MobilityGraph
 from decentralizepy.mappings.Mapping import Mapping
@@ -21,8 +22,10 @@ class PeerSamplerDynamic(PeerSampler):
                 )
                 assert iteration == self.iteration + 1
                 self.iteration = iteration
+                new_graph: MobilityGraph = self.graphs[iteration - 1].next_graph(iteration)
+                new_graph.write_graph_to_file(os.path.join(self.log_dir, f"graph_{iteration}.txt"))
                 self.graphs.append(
-                    self.graphs[iteration - 1].next_graph(self.graph_seed, iteration)
+                    new_graph
                 )
             return self.graphs[iteration].neighbors(node)
         else:
@@ -81,10 +84,7 @@ class PeerSamplerDynamic(PeerSampler):
         """
 
         self.iteration = -1
-        self.graphs = []
-
-        self.graph_seed = int(config["RANDOM_SEED"]["graph_seed"])
-        assert self.graph_seed is not None and self.graph_seed >= 0
+        self.graphs = [graph]  # Start with the initial graph
 
         self.instantiate(
             rank,

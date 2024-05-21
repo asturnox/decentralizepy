@@ -6,6 +6,7 @@ from collections import deque
 import torch
 
 from decentralizepy.graphs.Graph import Graph
+from decentralizepy.graphs.MobilityGraph import MobilityGraph
 from decentralizepy.mappings.Mapping import Mapping
 from decentralizepy.node.DPSGDNode import DPSGDNode
 
@@ -38,7 +39,7 @@ class DPSGDWithPeerSampler(DPSGDNode):
         rank: int,
         machine_id: int,
         mapping: Mapping,
-        graph: Graph,
+        graph: MobilityGraph,
         config,
         iterations=1,
         log_dir=".",

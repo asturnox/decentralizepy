@@ -9,7 +9,7 @@ import torch
 from matplotlib import pyplot as plt
 
 from decentralizepy import utils
-from decentralizepy.graphs.Graph import Graph
+from decentralizepy.graphs.MobilityGraph import MobilityGraph
 from decentralizepy.mappings.Mapping import Mapping
 from decentralizepy.node.Node import Node
 
@@ -162,6 +162,22 @@ class DPSGDNode(Node):
                     os.path.join(self.log_dir, "{}_train_loss.png".format(self.rank)),
                 )
 
+                self.save_plot(
+                    results_dict["test_loss"],
+                    "test_loss",
+                    "Test Loss",
+                    "Communication Rounds",
+                    os.path.join(self.log_dir, "{}_test_loss.png".format(self.rank)),
+                )
+
+                self.save_plot(
+                    results_dict["test_acc"],
+                    "test_acc",
+                    "Test Accuracy",
+                    "Communication Rounds",
+                    os.path.join(self.log_dir, "{}_test_acc.png".format(self.rank)),
+                )
+
             if self.dataset.__testing__ and rounds_to_test == 0:
                 rounds_to_test = self.test_after * change
                 logging.info("Evaluating on test set.")
@@ -202,7 +218,7 @@ class DPSGDNode(Node):
         rank,
         machine_id,
         mapping,
-        graph,
+        graph: MobilityGraph,
         iterations,
         log_dir,
         weights_store_dir,
@@ -276,7 +292,7 @@ class DPSGDNode(Node):
         rank: int,
         machine_id: int,
         mapping: Mapping,
-        graph: Graph,
+        graph: MobilityGraph,
         config,
         iterations=1,
         log_dir=".",
@@ -345,6 +361,7 @@ class DPSGDNode(Node):
 
         self.barrier = set()
         self.my_neighbors = self.graph.neighbors(self.uid)
+        print("My neighbors are: (instantiate) ", self.my_neighbors)
 
         self.init_sharing(config["SHARING"])
         self.peer_deques = dict()
@@ -374,7 +391,7 @@ class DPSGDNode(Node):
         rank: int,
         machine_id: int,
         mapping: Mapping,
-        graph: Graph,
+        graph: MobilityGraph,
         config,
         iterations=1,
         log_dir=".",
@@ -396,7 +413,7 @@ class DPSGDNode(Node):
             Machine ID on which the process in running
         mapping : decentralizepy.mappings
             The object containing the mapping rank <--> uid
-        graph : decentralizepy.graphs
+        graph : decentralizepy.graphs.MobilityGraph
             The object containing the global graph
         config : dict
             A dictionary of configurations. Must contain the following:
