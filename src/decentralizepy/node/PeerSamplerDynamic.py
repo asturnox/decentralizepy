@@ -1,7 +1,6 @@
 import logging
 
-from decentralizepy.graphs.Graph import Graph
-from decentralizepy.graphs.Regular import Regular
+from decentralizepy.graphs.MobilityGraph import MobilityGraph
 from decentralizepy.mappings.Mapping import Mapping
 from decentralizepy.node.PeerSampler import PeerSampler
 
@@ -23,27 +22,23 @@ class PeerSamplerDynamic(PeerSampler):
                 assert iteration == self.iteration + 1
                 self.iteration = iteration
                 self.graphs.append(
-                    Regular(
-                        self.graph.n_procs,
-                        self.graph_degree,
-                        seed=self.random_seed * 100000 + iteration,
-                    )
+                    self.graphs[iteration - 1].next_graph(self.graph_seed, iteration)
                 )
             return self.graphs[iteration].neighbors(node)
         else:
             return self.graph.neighbors(node)
 
     def __init__(
-        self,
-        rank: int,
-        machine_id: int,
-        mapping: Mapping,
-        graph: Graph,
-        config,
-        iterations=1,
-        log_dir=".",
-        log_level=logging.INFO,
-        *args
+            self,
+            rank: int,
+            machine_id: int,
+            mapping: Mapping,
+            graph: MobilityGraph,
+            config,
+            iterations=1,
+            log_dir=".",
+            log_level=logging.INFO,
+            *args
     ):
         """
         Constructor
@@ -72,6 +67,8 @@ class PeerSamplerDynamic(PeerSampler):
                 training_class = Training
                 epochs_per_round = 25
                 batch_size = 64
+            [RANDOM_SEED]
+                graph_seed
         iterations : int
             Number of iterations (communication steps) for which the model should be trained
         log_dir : str
@@ -86,8 +83,8 @@ class PeerSamplerDynamic(PeerSampler):
         self.iteration = -1
         self.graphs = []
 
-        nodeConfigs = config["NODE"]
-        self.graph_degree = nodeConfigs["graph_degree"]
+        self.graph_seed = int(config["RANDOM_SEED"]["graph_seed"])
+        assert self.graph_seed is not None and self.graph_seed >= 0
 
         self.instantiate(
             rank,

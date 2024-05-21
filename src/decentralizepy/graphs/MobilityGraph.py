@@ -1,4 +1,3 @@
-import networkx as nx
 import numpy as np
 
 from decentralizepy.graphs.MobilityNode import MobilityNode
@@ -20,6 +19,7 @@ class MobilityGraph:
             List of nodes in the graph
         """
         self.nodes = nodes
+        self.n_procs = len(nodes)
 
     def get_all_nodes(self):
         return self.nodes
@@ -110,3 +110,25 @@ class MobilityGraph:
                 neighbours.add(node.uid)
 
         return neighbours
+
+    def next_graph(self, seed: int, iteration: int):
+        """
+        Generates the next graph in the sequence
+
+        Parameters
+        ----------
+        seed : int
+            Random seed
+        iteration : int
+            Iteration number
+
+        Returns
+        -------
+        MobilityGraph
+            The next graph in the sequence
+        """
+        new_nodes = []
+        for node in self.nodes:
+            new_nodes.append(node.advance(seed, iteration))
+
+        return MobilityGraph(new_nodes)

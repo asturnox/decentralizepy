@@ -8,7 +8,7 @@ import numpy as np
 import torch
 
 from decentralizepy import utils
-from decentralizepy.graphs.Graph import Graph
+from decentralizepy.graphs.MobilityGraph import MobilityGraph
 from decentralizepy.mappings.Mapping import Mapping
 
 
@@ -153,7 +153,7 @@ class Node:
         rank,
         machine_id,
         mapping,
-        graph,
+        graph: MobilityGraph,
         iterations,
         log_dir,
     ):
@@ -168,7 +168,7 @@ class Node:
             Machine ID on which the process in running
         mapping : decentralizepy.mappings
             The object containing the mapping rank <--> uid
-        graph : decentralizepy.graphs
+        graph : decentralizepy.graphs.MobilityGraph
             The object containing the global graph
         iterations : int
             Number of iterations (communication steps) for which the model should be trained
@@ -332,7 +332,7 @@ class Node:
         rank: int,
         machine_id: int,
         mapping: Mapping,
-        graph: Graph,
+        graph: MobilityGraph,
         config,
         iterations=1,
         log_dir=".",
@@ -350,7 +350,7 @@ class Node:
             Machine ID on which the process in running
         mapping : decentralizepy.mappings
             The object containing the mapping rank <--> uid
-        graph : decentralizepy.graphs
+        graph : decentralizepy.graphs.MobilityGraph
             The object containing the global graph
         config : dict
             A dictionary of configurations.
@@ -400,7 +400,7 @@ class Node:
         rank: int,
         machine_id: int,
         mapping: Mapping,
-        graph: Graph,
+        graph: MobilityGraph,
         config,
         iterations=1,
         log_dir=".",

@@ -1,4 +1,7 @@
-from typing import Tuple
+from enum import Enum
+from typing import Tuple, Type
+
+import numpy as np
 
 
 class MobilityNode:
@@ -31,3 +34,34 @@ class MobilityNode:
         self.mobility_prob_vec = mobility_prob_vec
         self.velocity = velocity
         self.coverage_area_radius = coverage_area_radius
+
+    def advance(self, seed: int, iteration: int):
+        """
+        Returns a copy of the node after advancing it by one step
+        """
+        rng = np.random.default_rng(seed + 10000 * iteration)
+
+        dirs = list(Direction)
+        direction = rng.choice(dirs, p=self.mobility_prob_vec)
+        pos_vec = list(self.pos_vec)
+        if direction == Direction.UP:
+            pos_vec[1] += self.velocity
+        elif direction == Direction.DOWN:
+            pos_vec[1] -= self.velocity
+        elif direction == Direction.LEFT:
+            pos_vec[0] -= self.velocity
+        elif direction == Direction.RIGHT:
+            pos_vec[0] += self.velocity
+
+        return MobilityNode(self.uid, tuple(pos_vec), tuple(self.mobility_prob_vec), self.velocity,
+                            self.coverage_area_radius)
+
+
+class Direction(Enum):
+    """
+    Enum for the direction of the node
+    """
+    UP = 0
+    DOWN = 1
+    LEFT = 2
+    RIGHT = 3
