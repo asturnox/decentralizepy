@@ -6,6 +6,7 @@ from datetime import datetime
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
 import numpy as np
+from matplotlib.patches import Circle
 
 from decentralizepy.graphs.MobilityGraph import MobilityGraph
 from decentralizepy.graphs.MobilityNode import MobilityNode, Direction
@@ -50,12 +51,13 @@ def find_most_recent_experiment(base_directory):
 
 
 def read_coordinates_and_velocity(file_path) -> tuple[
-    list[tuple[float, float]], list[tuple[float, float]]]:
+    list[tuple[float, float]], list[tuple[float, float]], list[float]]:
     graph = MobilityGraph()
     graph.read_graph_from_file(file_path)
 
     positions = []
     mobility_vecs = []
+    coverage_radii = [node.coverage_area_radius for node in graph.nodes]
 
     for node in graph.nodes:
         positions.append(node.pos_vec)
@@ -67,17 +69,26 @@ def read_coordinates_and_velocity(file_path) -> tuple[
 
         mobility_vecs.append(unit_resultant_mobility_vec * node.velocity)
 
-    return positions, mobility_vecs
+    return positions, mobility_vecs, coverage_radii
 
 
-def update_plot(frame_number, data, scatter_plot, quiver_plot, colors):
-    positions, _ = data[frame_number]
+def update_plot(frame_number, data, scatter_plot, quiver_plot, circles, ax, colors):
+    positions, _, coverage_radii = data[frame_number]
 
     scatter_plot.set_color(colors)
     scatter_plot.set_offsets(positions)
     quiver_plot.set_offsets(positions)
 
-    return scatter_plot, quiver_plot
+    for circle in circles:
+        circle.remove()
+    circles.clear()
+
+    for pos, radius in zip(positions, coverage_radii):
+        circle = Circle(pos, radius, fill=False, edgecolor='b')
+        ax.add_patch(circle)
+        circles.append(circle)
+
+    return scatter_plot, quiver_plot, circles
 
 
 def main(data_path):
@@ -92,8 +103,8 @@ def main(data_path):
     for i in range(1, last_graph_file_number + 1):
         file_path = os.path.join(graphs_dir, f"graph_{i}.txt")
         if os.path.exists(file_path):
-            positions, velocity_vectors = read_coordinates_and_velocity(file_path)
-            data.append((positions, np.array(velocity_vectors)))
+            positions, velocity_vectors, coverage_radii = read_coordinates_and_velocity(file_path)
+            data.append((positions, np.array(velocity_vectors), coverage_radii))
         else:
             print(f"File graph_{i}.txt does not exist in the directory.")
             sys.exit(1)
@@ -103,7 +114,7 @@ def main(data_path):
         sys.exit(1)
 
     # Generate a list of colors
-    positions, velocity_vectors = data[0]
+    positions, velocity_vectors, _ = data[0]
     positions = np.array(positions)
 
     num_points = len(positions)
@@ -117,8 +128,8 @@ def main(data_path):
     ax.set_ylim(-50, 150)
 
     ani = animation.FuncAnimation(
-        fig, update_plot, frames=len(data), fargs=(data, scatter_plot, quiver_plot, colors), interval=500,
-        repeat=True
+        fig, update_plot, frames=len(data), fargs=(data, scatter_plot, quiver_plot, [], ax, colors), interval=500,
+        repeat=False
     )
 
     plt.show()

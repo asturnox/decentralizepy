@@ -93,6 +93,8 @@ class DPSGDNode(Node):
             for neighbor in self.my_neighbors:
                 self.communication.send(neighbor, to_send)
 
+            logging.debug("Sent to all neighbors")
+
             while not self.received_from_all():
                 sender, data = self.receive_DPSGD()
                 logging.debug(
@@ -108,22 +110,29 @@ class DPSGDNode(Node):
                 else:
                     self.peer_deques[sender].append(data)
 
+            logging.debug("Received from all")
+
             averaging_deque = dict()
             for neighbor in self.my_neighbors:
                 averaging_deque[neighbor] = self.peer_deques[neighbor]
 
+            logging.debug("Averaging")
             self.sharing._averaging(averaging_deque)
+            logging.debug("Finished averaging")
 
+            logging.debug("resetting optimizer")
             if self.reset_optimizer:
                 self.optimizer = self.optimizer_class(
                     self.model.parameters(), **self.optimizer_params
                 )  # Reset optimizer state
                 self.trainer.reset_optimizer(self.optimizer)
 
+            logging.debug("Finished resetting optimizer")
+
             if iteration:
                 with open(
-                    os.path.join(self.log_dir, "{}_results.json".format(self.rank)),
-                    "r",
+                        os.path.join(self.log_dir, "{}_results.json".format(self.rank)),
+                        "r",
                 ) as inf:
                     results_dict = json.load(inf)
             else:
@@ -214,17 +223,17 @@ class DPSGDNode(Node):
         logging.info("All neighbors disconnected. Process complete!")
 
     def cache_fields(
-        self,
-        rank,
-        machine_id,
-        mapping,
-        graph: MobilityGraph,
-        iterations,
-        log_dir,
-        weights_store_dir,
-        test_after,
-        train_evaluate_after,
-        reset_optimizer,
+            self,
+            rank,
+            machine_id,
+            mapping,
+            graph: MobilityGraph,
+            iterations,
+            log_dir,
+            weights_store_dir,
+            test_after,
+            train_evaluate_after,
+            reset_optimizer,
     ):
         """
         Instantiate object field with arguments.
@@ -288,20 +297,20 @@ class DPSGDNode(Node):
         )
 
     def instantiate(
-        self,
-        rank: int,
-        machine_id: int,
-        mapping: Mapping,
-        graph: MobilityGraph,
-        config,
-        iterations=1,
-        log_dir=".",
-        weights_store_dir=".",
-        log_level=logging.INFO,
-        test_after=5,
-        train_evaluate_after=1,
-        reset_optimizer=1,
-        *args
+            self,
+            rank: int,
+            machine_id: int,
+            mapping: Mapping,
+            graph: MobilityGraph,
+            config,
+            iterations=1,
+            log_dir=".",
+            weights_store_dir=".",
+            log_level=logging.INFO,
+            test_after=5,
+            train_evaluate_after=1,
+            reset_optimizer=1,
+            *args
     ):
         """
         Construct objects.
@@ -379,28 +388,28 @@ class DPSGDNode(Node):
         """
         for k in self.my_neighbors:
             if (
-                (k not in self.peer_deques)
-                or len(self.peer_deques[k]) == 0
-                or self.peer_deques[k][0]["iteration"] != self.iteration
+                    (k not in self.peer_deques)
+                    or len(self.peer_deques[k]) == 0
+                    or self.peer_deques[k][0]["iteration"] != self.iteration
             ):
                 return False
         return True
 
     def __init__(
-        self,
-        rank: int,
-        machine_id: int,
-        mapping: Mapping,
-        graph: MobilityGraph,
-        config,
-        iterations=1,
-        log_dir=".",
-        weights_store_dir=".",
-        log_level=logging.INFO,
-        test_after=5,
-        train_evaluate_after=1,
-        reset_optimizer=1,
-        *args
+            self,
+            rank: int,
+            machine_id: int,
+            mapping: Mapping,
+            graph: MobilityGraph,
+            config,
+            iterations=1,
+            log_dir=".",
+            weights_store_dir=".",
+            log_level=logging.INFO,
+            test_after=5,
+            train_evaluate_after=1,
+            reset_optimizer=1,
+            *args
     ):
         """
         Constructor

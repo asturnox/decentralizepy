@@ -8,8 +8,8 @@ cp $graph $config_file $run_path
 
 env_python=../venv/bin/python3 # Path to python executable of the environment | conda recommended
 machines=1 # number of machines in the runtime
-iterations=20
-test_after=10
+iterations=80
+test_after=20
 eval_file=$decpy_path/testingPeerSamplerDynamic.py # decentralized driver code (run on each machine)
 log_level=DEBUG # DEBUG | INFO | WARN | CRITICAL
 

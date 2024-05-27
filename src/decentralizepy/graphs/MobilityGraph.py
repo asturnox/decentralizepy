@@ -132,7 +132,7 @@ class MobilityGraph:
                 continue
 
             if np.linalg.norm(np.array(node.pos_vec) - np.array(self.nodes[uid].pos_vec)) <= self.nodes[
-                uid].coverage_area_radius:
+                uid].coverage_area_radius - 5:
                 neighbours.add(node.uid)
 
         return neighbours
@@ -156,7 +156,5 @@ class MobilityGraph:
         new_nodes = []
         for node in self.nodes:
             new_nodes.append(node.advance(self.seed, iteration))
-
-        print("new_nodes: ", new_nodes)
 
         return MobilityGraph(self.seed, new_nodes)
