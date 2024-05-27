@@ -1,3 +1,4 @@
+import logging
 from enum import Enum
 from typing import Tuple, Type
 
@@ -53,7 +54,8 @@ class MobilityNode:
         elif direction == Direction.RIGHT:
             pos_vec[0] += self.velocity
 
-        return MobilityNode(self.uid, tuple(pos_vec), tuple(self.mobility_prob_vec), self.velocity,
+        new_pos_vec = tuple(pos_vec)
+        return MobilityNode(self.uid, new_pos_vec, self.mobility_prob_vec, self.velocity,
                             self.coverage_area_radius)
 
 

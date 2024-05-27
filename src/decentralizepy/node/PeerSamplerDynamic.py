@@ -21,12 +21,16 @@ class PeerSamplerDynamic(PeerSampler):
                     )
                 )
                 assert iteration == self.iteration + 1
-                self.iteration = iteration
-                new_graph: MobilityGraph = self.graphs[iteration - 1].next_graph(iteration)
-                new_graph.write_graph_to_file(os.path.join(self.log_dir, f"graph_{iteration}.txt"))
+                # self.iteration is actually 1 behind the iteration that we have already generated
+                # hence the latest graph is at self.graphs[iteration]
+                new_graph: MobilityGraph = self.graphs[iteration].next_graph(iteration + 1)
                 self.graphs.append(
                     new_graph
                 )
+                self.iteration = iteration
+
+                new_graph.write_graph_to_file(os.path.join(self.log_dir, f"graph_{iteration + 1}.txt"))
+
             return self.graphs[iteration].neighbors(node)
         else:
             return self.graph.neighbors(node)

@@ -1,3 +1,5 @@
+import logging
+
 import numpy as np
 
 from decentralizepy.graphs.MobilityNode import MobilityNode
@@ -20,6 +22,9 @@ class MobilityGraph:
         seed : int
             Random seed
         """
+        self.nodes: list[MobilityNode] = []
+        self.n_procs = 0
+        self.seed = 0
 
         if seed is not None:
             self.seed = seed
