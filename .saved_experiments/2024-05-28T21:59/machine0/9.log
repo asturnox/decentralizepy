@@ -1,0 +1,467 @@
+[2024-05-28 22:00:19,927][DPSGDNode][DEBUG] Rank: 9
+[2024-05-28 22:00:19,928][DPSGDNode][DEBUG] type(graph): <class 'int'>
+[2024-05-28 22:00:19,928][DPSGDNode][DEBUG] type(mapping): <class 'decentralizepy.mappings.Linear.Linear'>
+[2024-05-28 22:00:29,467][CIFAR10][INFO] Loading training set.
+[2024-05-28 22:00:31,011][CIFAR10][DEBUG] Size fractions: [0.08332, 0.08332, 0.08332, 0.08332, 0.08332, 0.08332, 0.08332, 0.08332, 0.08332, 0.08332, 0.08332, 0.08347999999999994]
+[2024-05-28 22:00:31,039][CIFAR10][INFO] Loading testing set.
+[2024-05-28 22:00:31,751][CIFAR10][INFO] Extracting the validation set from the test set.
+[2024-05-28 22:00:31,789][Node][INFO] Dataset instantiation complete.
+[2024-05-28 22:00:31,923][DPSGDWithPeerSampler][INFO] Each proc uses 2 threads out of 32.
+[2024-05-28 22:00:31,923][Node][DEBUG] Sending connection request to -1
+[2024-05-28 22:00:31,923][TCP][DEBUG] Connecting to my neighbour: -1
+[2024-05-28 22:00:31,924][TCP][DEBUG] 9 sent the message to -1.
+[2024-05-28 22:00:31,924][TCP][DEBUG] Sent message size: 46
+[2024-05-28 22:00:31,924][Node][DEBUG] Waiting HELLO from -1
+[2024-05-28 22:00:31,952][Node][DEBUG] Received some message from -1 with CHANNEL: CONNECT
+[2024-05-28 22:00:31,952][Node][DEBUG] Received HELLO from -1
+[2024-05-28 22:00:31,953][DPSGDNode][INFO] Starting training iteration: 0
+[2024-05-28 22:00:32,484][Training][DEBUG] Round: 1 loss: 2.320279598236084
+[2024-05-28 22:00:32,494][Training][DEBUG] Round: 2 loss: 2.2865854501724243
+[2024-05-28 22:00:32,504][Training][DEBUG] Round: 3 loss: 2.366379181543986
+[2024-05-28 22:00:32,504][DPSGDWithPeerSampler][DEBUG] Requesting neighbors from the peer sampler.
+[2024-05-28 22:00:32,504][TCP][DEBUG] 9 sent the message to -1.
+[2024-05-28 22:00:32,505][TCP][DEBUG] Sent message size: 79
+[2024-05-28 22:00:32,510][Node][DEBUG] Received some message from -1 with CHANNEL: PEERS
+[2024-05-28 22:00:32,510][DPSGDWithPeerSampler][DEBUG] Neighbors this round: set()
+[2024-05-28 22:00:32,511][DPSGDNode][DEBUG] Connected to all neighbors
+[2024-05-28 22:00:32,512][Sharing][DEBUG] Model sending this round: [-0.07423265  0.05248431 -0.03095906 ... -0.00599325  0.00601416
+ -0.00971841]
+[2024-05-28 22:00:32,512][DPSGDNode][DEBUG] Sent to all neighbors
+[2024-05-28 22:00:32,512][DPSGDNode][DEBUG] Received from all
+[2024-05-28 22:00:32,512][DPSGDNode][DEBUG] Averaging
+[2024-05-28 22:00:32,513][DPSGDNode][DEBUG] Finished averaging
+[2024-05-28 22:00:32,513][DPSGDNode][DEBUG] resetting optimizer
+[2024-05-28 22:00:32,513][DPSGDNode][DEBUG] Finished resetting optimizer
+[2024-05-28 22:00:32,514][DPSGDNode][INFO] Starting training iteration: 1
+[2024-05-28 22:00:32,523][Training][DEBUG] Round: 1 loss: 3.181769847869873
+[2024-05-28 22:00:32,533][Training][DEBUG] Round: 2 loss: 2.8907934427261353
+[2024-05-28 22:00:32,542][Training][DEBUG] Round: 3 loss: 2.7309319178263345
+[2024-05-28 22:00:32,542][DPSGDWithPeerSampler][DEBUG] Requesting neighbors from the peer sampler.
+[2024-05-28 22:00:32,543][TCP][DEBUG] 9 sent the message to -1.
+[2024-05-28 22:00:32,543][TCP][DEBUG] Sent message size: 79
+[2024-05-28 22:00:32,545][Node][DEBUG] Received some message from -1 with CHANNEL: PEERS
+[2024-05-28 22:00:32,545][DPSGDWithPeerSampler][DEBUG] Neighbors this round: set()
+[2024-05-28 22:00:32,545][DPSGDNode][DEBUG] Connected to all neighbors
+[2024-05-28 22:00:32,545][Sharing][DEBUG] Model sending this round: [-0.07405561  0.05234995 -0.03146549 ... -0.00596421  0.00760395
+ -0.01284886]
+[2024-05-28 22:00:32,546][DPSGDNode][DEBUG] Sent to all neighbors
+[2024-05-28 22:00:32,546][DPSGDNode][DEBUG] Received from all
+[2024-05-28 22:00:32,546][DPSGDNode][DEBUG] Averaging
+[2024-05-28 22:00:32,546][DPSGDNode][DEBUG] Finished averaging
+[2024-05-28 22:00:32,546][DPSGDNode][DEBUG] resetting optimizer
+[2024-05-28 22:00:32,546][DPSGDNode][DEBUG] Finished resetting optimizer
+[2024-05-28 22:00:32,547][DPSGDNode][INFO] Starting training iteration: 2
+[2024-05-28 22:00:32,557][Training][DEBUG] Round: 1 loss: 2.7656161785125732
+[2024-05-28 22:00:32,567][Training][DEBUG] Round: 2 loss: 2.825011134147644
+[2024-05-28 22:00:32,576][Training][DEBUG] Round: 3 loss: 2.789076010386149
+[2024-05-28 22:00:32,576][DPSGDWithPeerSampler][DEBUG] Requesting neighbors from the peer sampler.
+[2024-05-28 22:00:32,577][TCP][DEBUG] 9 sent the message to -1.
+[2024-05-28 22:00:32,577][TCP][DEBUG] Sent message size: 79
+[2024-05-28 22:00:32,580][Node][DEBUG] Received some message from -1 with CHANNEL: PEERS
+[2024-05-28 22:00:32,581][DPSGDWithPeerSampler][DEBUG] Neighbors this round: {2}
+[2024-05-28 22:00:32,581][Node][DEBUG] Sending connection request to 2
+[2024-05-28 22:00:32,581][TCP][DEBUG] Connecting to my neighbour: 2
+[2024-05-28 22:00:32,581][TCP][DEBUG] 9 sent the message to 2.
+[2024-05-28 22:00:32,581][TCP][DEBUG] Sent message size: 46
+[2024-05-28 22:00:32,581][Node][DEBUG] Waiting HELLO from 2
+[2024-05-28 22:00:32,588][Node][DEBUG] Received some message from 2 with CHANNEL: CONNECT
+[2024-05-28 22:00:32,589][Node][DEBUG] Received HELLO from 2
+[2024-05-28 22:00:32,589][DPSGDNode][DEBUG] Connected to all neighbors
+[2024-05-28 22:00:32,589][Sharing][DEBUG] Model sending this round: [-0.07354867  0.05241689 -0.03157764 ... -0.00600133  0.00724308
+ -0.01323436]
+[2024-05-28 22:00:32,590][TCP][DEBUG] 9 sent the message to 2.
+[2024-05-28 22:00:32,590][TCP][DEBUG] Sent message size: 359554
+[2024-05-28 22:00:32,590][DPSGDNode][DEBUG] Sent to all neighbors
+[2024-05-28 22:00:32,590][Node][DEBUG] Received some message from 2 with CHANNEL: DPSGD
+[2024-05-28 22:00:32,591][DPSGDNode][DEBUG] Received Model from 2 of iteration 2
+[2024-05-28 22:00:32,591][DPSGDNode][DEBUG] Received from all
+[2024-05-28 22:00:32,591][DPSGDNode][DEBUG] Averaging
+[2024-05-28 22:00:32,591][Sharing][DEBUG] Averaging model from neighbor 2 of iteration 2
+[2024-05-28 22:00:32,592][DPSGDNode][DEBUG] Finished averaging
+[2024-05-28 22:00:32,592][DPSGDNode][DEBUG] resetting optimizer
+[2024-05-28 22:00:32,592][DPSGDNode][DEBUG] Finished resetting optimizer
+[2024-05-28 22:00:32,593][DPSGDNode][INFO] Starting training iteration: 3
+[2024-05-28 22:00:32,603][Training][DEBUG] Round: 1 loss: 2.6175458431243896
+[2024-05-28 22:00:32,613][Training][DEBUG] Round: 2 loss: 2.783811926841736
+[2024-05-28 22:00:32,622][Training][DEBUG] Round: 3 loss: 2.7512106895446777
+[2024-05-28 22:00:32,623][DPSGDWithPeerSampler][DEBUG] Requesting neighbors from the peer sampler.
+[2024-05-28 22:00:32,623][TCP][DEBUG] 9 sent the message to -1.
+[2024-05-28 22:00:32,623][TCP][DEBUG] Sent message size: 79
+[2024-05-28 22:00:32,625][Node][DEBUG] Received some message from -1 with CHANNEL: PEERS
+[2024-05-28 22:00:32,625][DPSGDWithPeerSampler][DEBUG] Neighbors this round: set()
+[2024-05-28 22:00:32,625][DPSGDNode][DEBUG] Connected to all neighbors
+[2024-05-28 22:00:32,625][Sharing][DEBUG] Model sending this round: [-0.0735255   0.05227854 -0.03160876 ... -0.00647991  0.00794127
+ -0.01090324]
+[2024-05-28 22:00:32,626][DPSGDNode][DEBUG] Sent to all neighbors
+[2024-05-28 22:00:32,626][DPSGDNode][DEBUG] Received from all
+[2024-05-28 22:00:32,626][DPSGDNode][DEBUG] Averaging
+[2024-05-28 22:00:32,626][DPSGDNode][DEBUG] Finished averaging
+[2024-05-28 22:00:32,626][DPSGDNode][DEBUG] resetting optimizer
+[2024-05-28 22:00:32,627][DPSGDNode][DEBUG] Finished resetting optimizer
+[2024-05-28 22:00:32,628][DPSGDNode][INFO] Starting training iteration: 4
+[2024-05-28 22:00:32,637][Training][DEBUG] Round: 1 loss: 2.145181179046631
+[2024-05-28 22:00:32,647][Training][DEBUG] Round: 2 loss: 2.333065986633301
+[2024-05-28 22:00:32,656][Training][DEBUG] Round: 3 loss: 2.2008121808369956
+[2024-05-28 22:00:32,656][DPSGDWithPeerSampler][DEBUG] Requesting neighbors from the peer sampler.
+[2024-05-28 22:00:32,657][TCP][DEBUG] 9 sent the message to -1.
+[2024-05-28 22:00:32,657][TCP][DEBUG] Sent message size: 79
+[2024-05-28 22:00:32,661][Node][DEBUG] Received some message from -1 with CHANNEL: PEERS
+[2024-05-28 22:00:32,661][DPSGDWithPeerSampler][DEBUG] Neighbors this round: {2}
+[2024-05-28 22:00:32,661][DPSGDNode][DEBUG] Connected to all neighbors
+[2024-05-28 22:00:32,661][Sharing][DEBUG] Model sending this round: [-0.07356497  0.05207317 -0.03210734 ... -0.00372351  0.00767104
+ -0.01170768]
+[2024-05-28 22:00:32,662][TCP][DEBUG] 9 sent the message to 2.
+[2024-05-28 22:00:32,662][TCP][DEBUG] Sent message size: 359554
+[2024-05-28 22:00:32,662][DPSGDNode][DEBUG] Sent to all neighbors
+[2024-05-28 22:00:32,686][Node][DEBUG] Received some message from 2 with CHANNEL: DPSGD
+[2024-05-28 22:00:32,686][DPSGDNode][DEBUG] Received Model from 2 of iteration 4
+[2024-05-28 22:00:32,686][DPSGDNode][DEBUG] Received from all
+[2024-05-28 22:00:32,687][DPSGDNode][DEBUG] Averaging
+[2024-05-28 22:00:32,687][Sharing][DEBUG] Averaging model from neighbor 2 of iteration 4
+[2024-05-28 22:00:32,688][DPSGDNode][DEBUG] Finished averaging
+[2024-05-28 22:00:32,688][DPSGDNode][DEBUG] resetting optimizer
+[2024-05-28 22:00:32,688][DPSGDNode][DEBUG] Finished resetting optimizer
+[2024-05-28 22:00:32,690][DPSGDNode][INFO] Starting training iteration: 5
+[2024-05-28 22:00:32,700][Training][DEBUG] Round: 1 loss: 2.1178975105285645
+[2024-05-28 22:00:32,709][Training][DEBUG] Round: 2 loss: 2.0955175161361694
+[2024-05-28 22:00:32,719][Training][DEBUG] Round: 3 loss: 2.0187928676605225
+[2024-05-28 22:00:32,719][DPSGDWithPeerSampler][DEBUG] Requesting neighbors from the peer sampler.
+[2024-05-28 22:00:32,720][TCP][DEBUG] 9 sent the message to -1.
+[2024-05-28 22:00:32,720][TCP][DEBUG] Sent message size: 79
+[2024-05-28 22:00:32,721][Node][DEBUG] Received some message from -1 with CHANNEL: PEERS
+[2024-05-28 22:00:32,721][DPSGDWithPeerSampler][DEBUG] Neighbors this round: {11}
+[2024-05-28 22:00:32,721][Node][DEBUG] Sending connection request to 11
+[2024-05-28 22:00:32,721][TCP][DEBUG] Connecting to my neighbour: 11
+[2024-05-28 22:00:32,721][TCP][DEBUG] 9 sent the message to 11.
+[2024-05-28 22:00:32,721][TCP][DEBUG] Sent message size: 46
+[2024-05-28 22:00:32,721][Node][DEBUG] Waiting HELLO from 11
+[2024-05-28 22:00:32,722][Node][DEBUG] Received some message from 11 with CHANNEL: CONNECT
+[2024-05-28 22:00:32,722][Node][DEBUG] Received HELLO from 11
+[2024-05-28 22:00:32,723][DPSGDNode][DEBUG] Connected to all neighbors
+[2024-05-28 22:00:32,723][Sharing][DEBUG] Model sending this round: [-0.07373002  0.05222434 -0.03206211 ... -0.00531753  0.00794318
+ -0.01386786]
+[2024-05-28 22:00:32,724][TCP][DEBUG] 9 sent the message to 11.
+[2024-05-28 22:00:32,724][TCP][DEBUG] Sent message size: 359554
+[2024-05-28 22:00:32,724][DPSGDNode][DEBUG] Sent to all neighbors
+[2024-05-28 22:00:32,725][Node][DEBUG] Received some message from 11 with CHANNEL: DPSGD
+[2024-05-28 22:00:32,725][DPSGDNode][DEBUG] Received Model from 11 of iteration 5
+[2024-05-28 22:00:32,725][DPSGDNode][DEBUG] Received from all
+[2024-05-28 22:00:32,725][DPSGDNode][DEBUG] Averaging
+[2024-05-28 22:00:32,725][Sharing][DEBUG] Averaging model from neighbor 11 of iteration 5
+[2024-05-28 22:00:32,726][DPSGDNode][DEBUG] Finished averaging
+[2024-05-28 22:00:32,727][DPSGDNode][DEBUG] resetting optimizer
+[2024-05-28 22:00:32,727][DPSGDNode][DEBUG] Finished resetting optimizer
+[2024-05-28 22:00:32,728][DPSGDNode][INFO] Starting training iteration: 6
+[2024-05-28 22:00:32,738][Training][DEBUG] Round: 1 loss: 2.091684579849243
+[2024-05-28 22:00:32,747][Training][DEBUG] Round: 2 loss: 2.302245020866394
+[2024-05-28 22:00:32,757][Training][DEBUG] Round: 3 loss: 2.213287591934204
+[2024-05-28 22:00:32,757][DPSGDWithPeerSampler][DEBUG] Requesting neighbors from the peer sampler.
+[2024-05-28 22:00:32,757][TCP][DEBUG] 9 sent the message to -1.
+[2024-05-28 22:00:32,757][TCP][DEBUG] Sent message size: 79
+[2024-05-28 22:00:32,759][Node][DEBUG] Received some message from -1 with CHANNEL: PEERS
+[2024-05-28 22:00:32,759][DPSGDWithPeerSampler][DEBUG] Neighbors this round: {2, 4}
+[2024-05-28 22:00:32,759][Node][DEBUG] Sending connection request to 4
+[2024-05-28 22:00:32,759][TCP][DEBUG] Connecting to my neighbour: 4
+[2024-05-28 22:00:32,760][TCP][DEBUG] 9 sent the message to 4.
+[2024-05-28 22:00:32,760][TCP][DEBUG] Sent message size: 46
+[2024-05-28 22:00:32,760][Node][DEBUG] Waiting HELLO from 4
+[2024-05-28 22:00:32,762][Node][DEBUG] Received some message from 2 with CHANNEL: DPSGD
+[2024-05-28 22:00:32,762][Node][DEBUG] Received some message from 4 with CHANNEL: CONNECT
+[2024-05-28 22:00:32,763][Node][DEBUG] Received HELLO from 4
+[2024-05-28 22:00:32,763][DPSGDNode][DEBUG] Connected to all neighbors
+[2024-05-28 22:00:32,763][Sharing][DEBUG] Model sending this round: [-0.07344712  0.05257225 -0.03155152 ... -0.00481941  0.00938268
+ -0.01260329]
+[2024-05-28 22:00:32,764][TCP][DEBUG] 9 sent the message to 2.
+[2024-05-28 22:00:32,764][TCP][DEBUG] Sent message size: 359554
+[2024-05-28 22:00:32,764][TCP][DEBUG] 9 sent the message to 4.
+[2024-05-28 22:00:32,764][TCP][DEBUG] Sent message size: 359554
+[2024-05-28 22:00:32,764][DPSGDNode][DEBUG] Sent to all neighbors
+[2024-05-28 22:00:32,764][DPSGDNode][DEBUG] Received Model from 2 of iteration 6
+[2024-05-28 22:00:32,765][Node][DEBUG] Received some message from 4 with CHANNEL: DPSGD
+[2024-05-28 22:00:32,765][DPSGDNode][DEBUG] Received Model from 4 of iteration 6
+[2024-05-28 22:00:32,765][DPSGDNode][DEBUG] Received from all
+[2024-05-28 22:00:32,765][DPSGDNode][DEBUG] Averaging
+[2024-05-28 22:00:32,765][Sharing][DEBUG] Averaging model from neighbor 2 of iteration 6
+[2024-05-28 22:00:32,766][Sharing][DEBUG] Averaging model from neighbor 4 of iteration 6
+[2024-05-28 22:00:32,767][DPSGDNode][DEBUG] Finished averaging
+[2024-05-28 22:00:32,767][DPSGDNode][DEBUG] resetting optimizer
+[2024-05-28 22:00:32,767][DPSGDNode][DEBUG] Finished resetting optimizer
+[2024-05-28 22:00:32,768][DPSGDNode][INFO] Starting training iteration: 7
+[2024-05-28 22:00:32,778][Training][DEBUG] Round: 1 loss: 2.3158836364746094
+[2024-05-28 22:00:32,788][Training][DEBUG] Round: 2 loss: 2.361383318901062
+[2024-05-28 22:00:32,798][Training][DEBUG] Round: 3 loss: 2.3075811862945557
+[2024-05-28 22:00:32,798][DPSGDWithPeerSampler][DEBUG] Requesting neighbors from the peer sampler.
+[2024-05-28 22:00:32,798][TCP][DEBUG] 9 sent the message to -1.
+[2024-05-28 22:00:32,798][TCP][DEBUG] Sent message size: 79
+[2024-05-28 22:00:32,799][Node][DEBUG] Received some message from -1 with CHANNEL: PEERS
+[2024-05-28 22:00:32,799][DPSGDWithPeerSampler][DEBUG] Neighbors this round: {4}
+[2024-05-28 22:00:32,799][DPSGDNode][DEBUG] Connected to all neighbors
+[2024-05-28 22:00:32,800][Sharing][DEBUG] Model sending this round: [-0.07327206  0.05285639 -0.0313208  ... -0.00478757  0.00756737
+ -0.01258722]
+[2024-05-28 22:00:32,801][TCP][DEBUG] 9 sent the message to 4.
+[2024-05-28 22:00:32,801][TCP][DEBUG] Sent message size: 359554
+[2024-05-28 22:00:32,801][DPSGDNode][DEBUG] Sent to all neighbors
+[2024-05-28 22:00:32,803][Node][DEBUG] Received some message from 4 with CHANNEL: DPSGD
+[2024-05-28 22:00:32,804][DPSGDNode][DEBUG] Received Model from 4 of iteration 7
+[2024-05-28 22:00:32,804][DPSGDNode][DEBUG] Received from all
+[2024-05-28 22:00:32,804][DPSGDNode][DEBUG] Averaging
+[2024-05-28 22:00:32,804][Sharing][DEBUG] Averaging model from neighbor 4 of iteration 7
+[2024-05-28 22:00:32,805][DPSGDNode][DEBUG] Finished averaging
+[2024-05-28 22:00:32,805][DPSGDNode][DEBUG] resetting optimizer
+[2024-05-28 22:00:32,805][DPSGDNode][DEBUG] Finished resetting optimizer
+[2024-05-28 22:00:32,806][DPSGDNode][INFO] Starting training iteration: 8
+[2024-05-28 22:00:32,816][Training][DEBUG] Round: 1 loss: 2.096978187561035
+[2024-05-28 22:00:32,826][Training][DEBUG] Round: 2 loss: 2.2713223695755005
+[2024-05-28 22:00:32,835][Training][DEBUG] Round: 3 loss: 2.394681374231974
+[2024-05-28 22:00:32,836][DPSGDWithPeerSampler][DEBUG] Requesting neighbors from the peer sampler.
+[2024-05-28 22:00:32,836][TCP][DEBUG] 9 sent the message to -1.
+[2024-05-28 22:00:32,836][TCP][DEBUG] Sent message size: 79
+[2024-05-28 22:00:32,837][Node][DEBUG] Received some message from -1 with CHANNEL: PEERS
+[2024-05-28 22:00:32,837][DPSGDWithPeerSampler][DEBUG] Neighbors this round: set()
+[2024-05-28 22:00:32,837][DPSGDNode][DEBUG] Connected to all neighbors
+[2024-05-28 22:00:32,837][Sharing][DEBUG] Model sending this round: [-0.07258757  0.05330575 -0.03064956 ... -0.007072    0.0069785
+ -0.0130441 ]
+[2024-05-28 22:00:32,838][DPSGDNode][DEBUG] Sent to all neighbors
+[2024-05-28 22:00:32,838][DPSGDNode][DEBUG] Received from all
+[2024-05-28 22:00:32,838][DPSGDNode][DEBUG] Averaging
+[2024-05-28 22:00:32,838][DPSGDNode][DEBUG] Finished averaging
+[2024-05-28 22:00:32,838][DPSGDNode][DEBUG] resetting optimizer
+[2024-05-28 22:00:32,838][DPSGDNode][DEBUG] Finished resetting optimizer
+[2024-05-28 22:00:32,839][DPSGDNode][INFO] Starting training iteration: 9
+[2024-05-28 22:00:32,849][Training][DEBUG] Round: 1 loss: 2.369602680206299
+[2024-05-28 22:00:32,858][Training][DEBUG] Round: 2 loss: 2.302299737930298
+[2024-05-28 22:00:32,868][Training][DEBUG] Round: 3 loss: 2.2332690556844077
+[2024-05-28 22:00:32,868][DPSGDWithPeerSampler][DEBUG] Requesting neighbors from the peer sampler.
+[2024-05-28 22:00:32,868][TCP][DEBUG] 9 sent the message to -1.
+[2024-05-28 22:00:32,868][TCP][DEBUG] Sent message size: 79
+[2024-05-28 22:00:32,872][Node][DEBUG] Received some message from -1 with CHANNEL: PEERS
+[2024-05-28 22:00:32,872][DPSGDWithPeerSampler][DEBUG] Neighbors this round: {1}
+[2024-05-28 22:00:32,872][Node][DEBUG] Sending connection request to 1
+[2024-05-28 22:00:32,872][TCP][DEBUG] Connecting to my neighbour: 1
+[2024-05-28 22:00:32,872][TCP][DEBUG] 9 sent the message to 1.
+[2024-05-28 22:00:32,872][TCP][DEBUG] Sent message size: 46
+[2024-05-28 22:00:32,872][Node][DEBUG] Waiting HELLO from 1
+[2024-05-28 22:00:32,885][Node][DEBUG] Received some message from 1 with CHANNEL: CONNECT
+[2024-05-28 22:00:32,885][Node][DEBUG] Received HELLO from 1
+[2024-05-28 22:00:32,885][DPSGDNode][DEBUG] Connected to all neighbors
+[2024-05-28 22:00:32,886][Sharing][DEBUG] Model sending this round: [-0.0729777   0.05301153 -0.03079527 ... -0.0071624   0.00682212
+ -0.01237858]
+[2024-05-28 22:00:32,886][TCP][DEBUG] 9 sent the message to 1.
+[2024-05-28 22:00:32,887][TCP][DEBUG] Sent message size: 359554
+[2024-05-28 22:00:32,887][DPSGDNode][DEBUG] Sent to all neighbors
+[2024-05-28 22:00:32,887][Node][DEBUG] Received some message from 1 with CHANNEL: DPSGD
+[2024-05-28 22:00:32,887][DPSGDNode][DEBUG] Received Model from 1 of iteration 9
+[2024-05-28 22:00:32,887][DPSGDNode][DEBUG] Received from all
+[2024-05-28 22:00:32,887][DPSGDNode][DEBUG] Averaging
+[2024-05-28 22:00:32,887][Sharing][DEBUG] Averaging model from neighbor 1 of iteration 9
+[2024-05-28 22:00:32,889][DPSGDNode][DEBUG] Finished averaging
+[2024-05-28 22:00:32,889][DPSGDNode][DEBUG] resetting optimizer
+[2024-05-28 22:00:32,889][DPSGDNode][DEBUG] Finished resetting optimizer
+[2024-05-28 22:00:32,912][DPSGDNode][INFO] Starting training iteration: 10
+[2024-05-28 22:00:32,922][Training][DEBUG] Round: 1 loss: 2.212965726852417
+[2024-05-28 22:00:32,931][Training][DEBUG] Round: 2 loss: 2.2533661127090454
+[2024-05-28 22:00:32,941][Training][DEBUG] Round: 3 loss: 2.1663712660471597
+[2024-05-28 22:00:32,941][DPSGDWithPeerSampler][DEBUG] Requesting neighbors from the peer sampler.
+[2024-05-28 22:00:32,941][TCP][DEBUG] 9 sent the message to -1.
+[2024-05-28 22:00:32,941][TCP][DEBUG] Sent message size: 79
+[2024-05-28 22:00:32,944][Node][DEBUG] Received some message from -1 with CHANNEL: PEERS
+[2024-05-28 22:00:32,944][DPSGDWithPeerSampler][DEBUG] Neighbors this round: set()
+[2024-05-28 22:00:32,944][DPSGDNode][DEBUG] Connected to all neighbors
+[2024-05-28 22:00:32,945][Sharing][DEBUG] Model sending this round: [-0.07274223  0.05299878 -0.03081677 ... -0.00660055  0.00512498
+ -0.0130516 ]
+[2024-05-28 22:00:32,945][DPSGDNode][DEBUG] Sent to all neighbors
+[2024-05-28 22:00:32,945][DPSGDNode][DEBUG] Received from all
+[2024-05-28 22:00:32,945][DPSGDNode][DEBUG] Averaging
+[2024-05-28 22:00:32,946][DPSGDNode][DEBUG] Finished averaging
+[2024-05-28 22:00:32,946][DPSGDNode][DEBUG] resetting optimizer
+[2024-05-28 22:00:32,946][DPSGDNode][DEBUG] Finished resetting optimizer
+[2024-05-28 22:00:32,947][DPSGDNode][INFO] Starting training iteration: 11
+[2024-05-28 22:00:32,957][Training][DEBUG] Round: 1 loss: 2.2863683700561523
+[2024-05-28 22:00:32,967][Training][DEBUG] Round: 2 loss: 2.4533872604370117
+[2024-05-28 22:00:32,976][Training][DEBUG] Round: 3 loss: 2.317601521809896
+[2024-05-28 22:00:32,976][DPSGDWithPeerSampler][DEBUG] Requesting neighbors from the peer sampler.
+[2024-05-28 22:00:32,977][TCP][DEBUG] 9 sent the message to -1.
+[2024-05-28 22:00:32,977][TCP][DEBUG] Sent message size: 79
+[2024-05-28 22:00:32,978][Node][DEBUG] Received some message from -1 with CHANNEL: PEERS
+[2024-05-28 22:00:32,978][DPSGDWithPeerSampler][DEBUG] Neighbors this round: set()
+[2024-05-28 22:00:32,978][DPSGDNode][DEBUG] Connected to all neighbors
+[2024-05-28 22:00:32,979][Sharing][DEBUG] Model sending this round: [-0.07252654  0.05313972 -0.03061555 ... -0.00539361  0.00757468
+ -0.0125694 ]
+[2024-05-28 22:00:32,979][DPSGDNode][DEBUG] Sent to all neighbors
+[2024-05-28 22:00:32,979][DPSGDNode][DEBUG] Received from all
+[2024-05-28 22:00:32,979][DPSGDNode][DEBUG] Averaging
+[2024-05-28 22:00:32,980][DPSGDNode][DEBUG] Finished averaging
+[2024-05-28 22:00:32,980][DPSGDNode][DEBUG] resetting optimizer
+[2024-05-28 22:00:32,980][DPSGDNode][DEBUG] Finished resetting optimizer
+[2024-05-28 22:00:32,989][DPSGDNode][INFO] Starting training iteration: 12
+[2024-05-28 22:00:33,000][Training][DEBUG] Round: 1 loss: 2.213844060897827
+[2024-05-28 22:00:33,009][Training][DEBUG] Round: 2 loss: 2.3962234258651733
+[2024-05-28 22:00:33,018][Training][DEBUG] Round: 3 loss: 2.2690455118815103
+[2024-05-28 22:00:33,019][DPSGDWithPeerSampler][DEBUG] Requesting neighbors from the peer sampler.
+[2024-05-28 22:00:33,019][TCP][DEBUG] 9 sent the message to -1.
+[2024-05-28 22:00:33,019][TCP][DEBUG] Sent message size: 79
+[2024-05-28 22:00:33,023][Node][DEBUG] Received some message from -1 with CHANNEL: PEERS
+[2024-05-28 22:00:33,023][DPSGDWithPeerSampler][DEBUG] Neighbors this round: set()
+[2024-05-28 22:00:33,023][DPSGDNode][DEBUG] Connected to all neighbors
+[2024-05-28 22:00:33,024][Sharing][DEBUG] Model sending this round: [-0.07224582  0.05343689 -0.03021367 ... -0.00386601  0.00667282
+ -0.01242883]
+[2024-05-28 22:00:33,024][DPSGDNode][DEBUG] Sent to all neighbors
+[2024-05-28 22:00:33,024][DPSGDNode][DEBUG] Received from all
+[2024-05-28 22:00:33,024][DPSGDNode][DEBUG] Averaging
+[2024-05-28 22:00:33,024][DPSGDNode][DEBUG] Finished averaging
+[2024-05-28 22:00:33,025][DPSGDNode][DEBUG] resetting optimizer
+[2024-05-28 22:00:33,025][DPSGDNode][DEBUG] Finished resetting optimizer
+[2024-05-28 22:00:33,026][DPSGDNode][INFO] Starting training iteration: 13
+[2024-05-28 22:00:33,035][Training][DEBUG] Round: 1 loss: 2.3853306770324707
+[2024-05-28 22:00:33,045][Training][DEBUG] Round: 2 loss: 2.3741610050201416
+[2024-05-28 22:00:33,055][Training][DEBUG] Round: 3 loss: 2.208985447883606
+[2024-05-28 22:00:33,055][DPSGDWithPeerSampler][DEBUG] Requesting neighbors from the peer sampler.
+[2024-05-28 22:00:33,055][TCP][DEBUG] 9 sent the message to -1.
+[2024-05-28 22:00:33,055][TCP][DEBUG] Sent message size: 79
+[2024-05-28 22:00:33,056][Node][DEBUG] Received some message from -1 with CHANNEL: PEERS
+[2024-05-28 22:00:33,056][DPSGDWithPeerSampler][DEBUG] Neighbors this round: {0, 1}
+[2024-05-28 22:00:33,056][Node][DEBUG] Sending connection request to 0
+[2024-05-28 22:00:33,056][TCP][DEBUG] Connecting to my neighbour: 0
+[2024-05-28 22:00:33,057][TCP][DEBUG] 9 sent the message to 0.
+[2024-05-28 22:00:33,057][TCP][DEBUG] Sent message size: 46
+[2024-05-28 22:00:33,057][Node][DEBUG] Waiting HELLO from 0
+[2024-05-28 22:00:33,059][Node][DEBUG] Received some message from 1 with CHANNEL: DPSGD
+[2024-05-28 22:00:33,061][Node][DEBUG] Received some message from 0 with CHANNEL: CONNECT
+[2024-05-28 22:00:33,061][Node][DEBUG] Received HELLO from 0
+[2024-05-28 22:00:33,061][DPSGDNode][DEBUG] Connected to all neighbors
+[2024-05-28 22:00:33,062][Sharing][DEBUG] Model sending this round: [-0.07228032  0.0533754  -0.03037863 ... -0.00549969  0.00514942
+ -0.00946872]
+[2024-05-28 22:00:33,062][TCP][DEBUG] 9 sent the message to 0.
+[2024-05-28 22:00:33,062][TCP][DEBUG] Sent message size: 359554
+[2024-05-28 22:00:33,063][TCP][DEBUG] 9 sent the message to 1.
+[2024-05-28 22:00:33,063][TCP][DEBUG] Sent message size: 359554
+[2024-05-28 22:00:33,063][DPSGDNode][DEBUG] Sent to all neighbors
+[2024-05-28 22:00:33,063][DPSGDNode][DEBUG] Received Model from 1 of iteration 13
+[2024-05-28 22:00:33,063][Node][DEBUG] Received some message from 0 with CHANNEL: DPSGD
+[2024-05-28 22:00:33,063][DPSGDNode][DEBUG] Received Model from 0 of iteration 13
+[2024-05-28 22:00:33,064][DPSGDNode][DEBUG] Received from all
+[2024-05-28 22:00:33,064][DPSGDNode][DEBUG] Averaging
+[2024-05-28 22:00:33,064][Sharing][DEBUG] Averaging model from neighbor 0 of iteration 13
+[2024-05-28 22:00:33,064][Sharing][DEBUG] Averaging model from neighbor 1 of iteration 13
+[2024-05-28 22:00:33,065][DPSGDNode][DEBUG] Finished averaging
+[2024-05-28 22:00:33,066][DPSGDNode][DEBUG] resetting optimizer
+[2024-05-28 22:00:33,066][DPSGDNode][DEBUG] Finished resetting optimizer
+[2024-05-28 22:00:33,067][DPSGDNode][INFO] Starting training iteration: 14
+[2024-05-28 22:00:33,077][Training][DEBUG] Round: 1 loss: 2.040487766265869
+[2024-05-28 22:00:33,086][Training][DEBUG] Round: 2 loss: 2.1159074306488037
+[2024-05-28 22:00:33,096][Training][DEBUG] Round: 3 loss: 2.2027534643809
+[2024-05-28 22:00:33,096][DPSGDWithPeerSampler][DEBUG] Requesting neighbors from the peer sampler.
+[2024-05-28 22:00:33,096][TCP][DEBUG] 9 sent the message to -1.
+[2024-05-28 22:00:33,096][TCP][DEBUG] Sent message size: 79
+[2024-05-28 22:00:33,097][Node][DEBUG] Received some message from -1 with CHANNEL: PEERS
+[2024-05-28 22:00:33,097][DPSGDWithPeerSampler][DEBUG] Neighbors this round: set()
+[2024-05-28 22:00:33,097][DPSGDNode][DEBUG] Connected to all neighbors
+[2024-05-28 22:00:33,098][Sharing][DEBUG] Model sending this round: [-0.0728729   0.053017   -0.03046092 ... -0.00610869  0.00741384
+ -0.01014293]
+[2024-05-28 22:00:33,098][DPSGDNode][DEBUG] Sent to all neighbors
+[2024-05-28 22:00:33,098][DPSGDNode][DEBUG] Received from all
+[2024-05-28 22:00:33,098][DPSGDNode][DEBUG] Averaging
+[2024-05-28 22:00:33,099][DPSGDNode][DEBUG] Finished averaging
+[2024-05-28 22:00:33,099][DPSGDNode][DEBUG] resetting optimizer
+[2024-05-28 22:00:33,099][DPSGDNode][DEBUG] Finished resetting optimizer
+[2024-05-28 22:00:33,100][DPSGDNode][INFO] Starting training iteration: 15
+[2024-05-28 22:00:33,109][Training][DEBUG] Round: 1 loss: 2.649014711380005
+[2024-05-28 22:00:33,119][Training][DEBUG] Round: 2 loss: 2.360407590866089
+[2024-05-28 22:00:33,128][Training][DEBUG] Round: 3 loss: 2.2948618729909263
+[2024-05-28 22:00:33,128][DPSGDWithPeerSampler][DEBUG] Requesting neighbors from the peer sampler.
+[2024-05-28 22:00:33,129][TCP][DEBUG] 9 sent the message to -1.
+[2024-05-28 22:00:33,129][TCP][DEBUG] Sent message size: 79
+[2024-05-28 22:00:33,129][Node][DEBUG] Received some message from -1 with CHANNEL: PEERS
+[2024-05-28 22:00:33,129][DPSGDWithPeerSampler][DEBUG] Neighbors this round: set()
+[2024-05-28 22:00:33,130][DPSGDNode][DEBUG] Connected to all neighbors
+[2024-05-28 22:00:33,130][Sharing][DEBUG] Model sending this round: [-0.07288348  0.05290775 -0.03043917 ... -0.00353619  0.00739046
+ -0.01319694]
+[2024-05-28 22:00:33,130][DPSGDNode][DEBUG] Sent to all neighbors
+[2024-05-28 22:00:33,130][DPSGDNode][DEBUG] Received from all
+[2024-05-28 22:00:33,131][DPSGDNode][DEBUG] Averaging
+[2024-05-28 22:00:33,131][DPSGDNode][DEBUG] Finished averaging
+[2024-05-28 22:00:33,131][DPSGDNode][DEBUG] resetting optimizer
+[2024-05-28 22:00:33,131][DPSGDNode][DEBUG] Finished resetting optimizer
+[2024-05-28 22:00:33,132][DPSGDNode][INFO] Starting training iteration: 16
+[2024-05-28 22:00:33,142][Training][DEBUG] Round: 1 loss: 2.224095582962036
+[2024-05-28 22:00:33,151][Training][DEBUG] Round: 2 loss: 2.240168571472168
+[2024-05-28 22:00:33,161][Training][DEBUG] Round: 3 loss: 2.51238218943278
+[2024-05-28 22:00:33,161][DPSGDWithPeerSampler][DEBUG] Requesting neighbors from the peer sampler.
+[2024-05-28 22:00:33,161][TCP][DEBUG] 9 sent the message to -1.
+[2024-05-28 22:00:33,161][TCP][DEBUG] Sent message size: 79
+[2024-05-28 22:00:33,162][Node][DEBUG] Received some message from -1 with CHANNEL: PEERS
+[2024-05-28 22:00:33,162][DPSGDWithPeerSampler][DEBUG] Neighbors this round: set()
+[2024-05-28 22:00:33,163][DPSGDNode][DEBUG] Connected to all neighbors
+[2024-05-28 22:00:33,163][Sharing][DEBUG] Model sending this round: [-0.07215536  0.05356517 -0.02970326 ... -0.00627356  0.0070533
+ -0.01159999]
+[2024-05-28 22:00:33,163][DPSGDNode][DEBUG] Sent to all neighbors
+[2024-05-28 22:00:33,164][DPSGDNode][DEBUG] Received from all
+[2024-05-28 22:00:33,164][DPSGDNode][DEBUG] Averaging
+[2024-05-28 22:00:33,164][DPSGDNode][DEBUG] Finished averaging
+[2024-05-28 22:00:33,164][DPSGDNode][DEBUG] resetting optimizer
+[2024-05-28 22:00:33,164][DPSGDNode][DEBUG] Finished resetting optimizer
+[2024-05-28 22:00:33,165][DPSGDNode][INFO] Starting training iteration: 17
+[2024-05-28 22:00:33,175][Training][DEBUG] Round: 1 loss: 2.265763998031616
+[2024-05-28 22:00:33,184][Training][DEBUG] Round: 2 loss: 2.181970715522766
+[2024-05-28 22:00:33,194][Training][DEBUG] Round: 3 loss: 2.1842997074127197
+[2024-05-28 22:00:33,194][DPSGDWithPeerSampler][DEBUG] Requesting neighbors from the peer sampler.
+[2024-05-28 22:00:33,194][TCP][DEBUG] 9 sent the message to -1.
+[2024-05-28 22:00:33,194][TCP][DEBUG] Sent message size: 79
+[2024-05-28 22:00:33,209][Node][DEBUG] Received some message from -1 with CHANNEL: PEERS
+[2024-05-28 22:00:33,209][DPSGDWithPeerSampler][DEBUG] Neighbors this round: set()
+[2024-05-28 22:00:33,209][DPSGDNode][DEBUG] Connected to all neighbors
+[2024-05-28 22:00:33,211][Sharing][DEBUG] Model sending this round: [-0.07216524  0.05375278 -0.02926318 ... -0.00699315  0.00521842
+ -0.01236103]
+[2024-05-28 22:00:33,211][DPSGDNode][DEBUG] Sent to all neighbors
+[2024-05-28 22:00:33,211][DPSGDNode][DEBUG] Received from all
+[2024-05-28 22:00:33,211][DPSGDNode][DEBUG] Averaging
+[2024-05-28 22:00:33,211][DPSGDNode][DEBUG] Finished averaging
+[2024-05-28 22:00:33,212][DPSGDNode][DEBUG] resetting optimizer
+[2024-05-28 22:00:33,212][DPSGDNode][DEBUG] Finished resetting optimizer
+[2024-05-28 22:00:33,213][DPSGDNode][INFO] Starting training iteration: 18
+[2024-05-28 22:00:33,222][Training][DEBUG] Round: 1 loss: 2.2889790534973145
+[2024-05-28 22:00:33,232][Training][DEBUG] Round: 2 loss: 2.2376056909561157
+[2024-05-28 22:00:33,248][Training][DEBUG] Round: 3 loss: 2.35186505317688
+[2024-05-28 22:00:33,248][DPSGDWithPeerSampler][DEBUG] Requesting neighbors from the peer sampler.
+[2024-05-28 22:00:33,248][TCP][DEBUG] 9 sent the message to -1.
+[2024-05-28 22:00:33,248][TCP][DEBUG] Sent message size: 79
+[2024-05-28 22:00:33,255][Node][DEBUG] Received some message from -1 with CHANNEL: PEERS
+[2024-05-28 22:00:33,260][DPSGDWithPeerSampler][DEBUG] Neighbors this round: {0, 2}
+[2024-05-28 22:00:33,260][DPSGDNode][DEBUG] Connected to all neighbors
+[2024-05-28 22:00:33,261][Sharing][DEBUG] Model sending this round: [-0.07183912  0.05394624 -0.02917523 ... -0.00594842  0.00789114
+ -0.01171259]
+[2024-05-28 22:00:33,262][TCP][DEBUG] 9 sent the message to 0.
+[2024-05-28 22:00:33,262][TCP][DEBUG] Sent message size: 359554
+[2024-05-28 22:00:33,262][TCP][DEBUG] 9 sent the message to 2.
+[2024-05-28 22:00:33,263][TCP][DEBUG] Sent message size: 359554
+[2024-05-28 22:00:33,263][DPSGDNode][DEBUG] Sent to all neighbors
+[2024-05-28 22:00:33,286][Node][DEBUG] Received some message from 0 with CHANNEL: DPSGD
+[2024-05-28 22:00:33,286][DPSGDNode][DEBUG] Received Model from 0 of iteration 18
+[2024-05-28 22:00:33,314][Node][DEBUG] Received some message from 2 with CHANNEL: DPSGD
+[2024-05-28 22:00:33,314][DPSGDNode][DEBUG] Received Model from 2 of iteration 18
+[2024-05-28 22:00:33,314][DPSGDNode][DEBUG] Received from all
+[2024-05-28 22:00:33,315][DPSGDNode][DEBUG] Averaging
+[2024-05-28 22:00:33,315][Sharing][DEBUG] Averaging model from neighbor 0 of iteration 18
+[2024-05-28 22:00:33,315][Sharing][DEBUG] Averaging model from neighbor 2 of iteration 18
+[2024-05-28 22:00:33,316][DPSGDNode][DEBUG] Finished averaging
+[2024-05-28 22:00:33,317][DPSGDNode][DEBUG] resetting optimizer
+[2024-05-28 22:00:33,317][DPSGDNode][DEBUG] Finished resetting optimizer
+[2024-05-28 22:00:33,318][DPSGDNode][INFO] Starting training iteration: 19
+[2024-05-28 22:00:33,328][Training][DEBUG] Round: 1 loss: 1.8622575998306274
+[2024-05-28 22:00:33,337][Training][DEBUG] Round: 2 loss: 2.0445087552070618
+[2024-05-28 22:00:33,347][Training][DEBUG] Round: 3 loss: 1.9882930119832356
+[2024-05-28 22:00:33,347][DPSGDWithPeerSampler][DEBUG] Requesting neighbors from the peer sampler.
+[2024-05-28 22:00:33,347][TCP][DEBUG] 9 sent the message to -1.
+[2024-05-28 22:00:33,347][TCP][DEBUG] Sent message size: 79
+[2024-05-28 22:00:33,348][Node][DEBUG] Received some message from -1 with CHANNEL: PEERS
+[2024-05-28 22:00:33,348][DPSGDWithPeerSampler][DEBUG] Neighbors this round: set()
+[2024-05-28 22:00:33,348][DPSGDNode][DEBUG] Connected to all neighbors
+[2024-05-28 22:00:33,349][Sharing][DEBUG] Model sending this round: [-0.0718443   0.05407142 -0.02965428 ... -0.00422775  0.00606468
+ -0.01257664]
+[2024-05-28 22:00:33,349][DPSGDNode][DEBUG] Sent to all neighbors
+[2024-05-28 22:00:33,349][DPSGDNode][DEBUG] Received from all
+[2024-05-28 22:00:33,349][DPSGDNode][DEBUG] Averaging
+[2024-05-28 22:00:33,350][DPSGDNode][DEBUG] Finished averaging
+[2024-05-28 22:00:33,350][DPSGDNode][DEBUG] resetting optimizer
+[2024-05-28 22:00:33,350][DPSGDNode][DEBUG] Finished resetting optimizer
+[2024-05-28 22:00:33,351][DPSGDNode][INFO] Evaluating on train set.

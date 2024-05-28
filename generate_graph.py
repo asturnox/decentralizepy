@@ -63,7 +63,7 @@ if __name__ == "__main__":
         seed = None
         file_name = None
         # Defaults for convenience
-        num_nodes = 256
+        num_nodes = 128
         size = 100
         velocity_step = 0.2
         high_mobility_proportion = 0.2
