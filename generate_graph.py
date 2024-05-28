@@ -63,7 +63,7 @@ if __name__ == "__main__":
         seed = None
         file_name = None
         # Defaults for convenience
-        num_nodes = 12
+        num_nodes = 256
         size = 100
         velocity_step = 0.2
         high_mobility_proportion = 0.2
@@ -82,11 +82,12 @@ if __name__ == "__main__":
                 size = int(currentValue)
             elif currentArgument in ("-v", "--velocityStep"):
                 velocity_step = float(currentValue)
-            elif high_mobility_proportion in ("-m", "--highMobilityProportion"):
+            elif currentArgument in ("-m", "--highMobilityProportion"):
                 high_mobility_proportion = float(currentValue)
 
         if file_name is None:
-            file_name = f"tutorial/dynamic_{num_nodes}.txt"
+            file_name = f"tutorial/dynamic_{num_nodes}_{str(high_mobility_proportion).replace('.', '_')}.txt"
+            print(file_name)
 
         if seed is None:
             seed = np.random.randint(0, 100000)
@@ -99,15 +100,15 @@ if __name__ == "__main__":
             mobility_prob_vec = (rng.uniform(0, 1), rng.uniform(0, 1), rng.uniform(0, 1), rng.uniform(0, 1))
             mobility_prob_vec = tuple([x / sum(mobility_prob_vec) for x in mobility_prob_vec])
 
-            velocity_mul = 1
             velocity_min = 0
+            velocity_mul = 1
             if i / num_nodes < high_mobility_proportion:
                 # These are clients with high mobility
                 # At least as velocity_mul times as fast as the fastest low-mobility nodes
-                velocity_mul = 2
+                velocity_mul = 1.75
                 velocity_min = size * velocity_step
 
-            velocity = rng.uniform(velocity_min, size * velocity_step) * velocity_mul
+            velocity = rng.uniform(velocity_min, velocity_min + (size * velocity_step)) * velocity_mul
 
             coverage_area_radius = 15
 
