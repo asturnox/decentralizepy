@@ -36,7 +36,7 @@ class MobilityNode:
         self.velocity = velocity
         self.coverage_area_radius = coverage_area_radius
 
-    def advance(self, seed: int, iteration: int):
+    def advance(self, seed: int, iteration: int, width: int, height: int):
         """
         Returns a copy of the node after advancing it by one step
         """
@@ -46,13 +46,13 @@ class MobilityNode:
         direction = rng.choice(dirs, p=self.mobility_prob_vec)
         pos_vec = list(self.pos_vec)
         if direction == Direction.UP:
-            pos_vec[1] += self.velocity
+            pos_vec[1] = (pos_vec[1] + self.velocity) % height
         elif direction == Direction.DOWN:
-            pos_vec[1] -= self.velocity
+            pos_vec[1] = (pos_vec[1] - self.velocity) % height
         elif direction == Direction.LEFT:
-            pos_vec[0] -= self.velocity
+            pos_vec[0] = (pos_vec[0] - self.velocity) % width
         elif direction == Direction.RIGHT:
-            pos_vec[0] += self.velocity
+            pos_vec[0] = (pos_vec[0] + self.velocity) % width
 
         new_pos_vec = tuple(pos_vec)
         return MobilityNode(self.uid, new_pos_vec, self.mobility_prob_vec, self.velocity,
