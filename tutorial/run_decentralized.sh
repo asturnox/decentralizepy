@@ -11,15 +11,15 @@ cp $graph $config_file $run_path
 
 env_python=../.venv/bin/python3 # Path to python executable of the environment | conda recommended
 machines=1 # number of machines in the runtime
-iterations=2000
-test_after=20
+iterations=150
+test_after=10
 eval_file=$decpy_path/testingPeerSamplerDynamic.py # decentralized driver code (run on each machine)
 log_level=DEBUG # DEBUG | INFO | WARN | CRITICAL
 
 m=0 # machine id corresponding consistent with ip.json
 echo M is $m
 
-procs_per_machine=128
+procs_per_machine=48
 echo procs per machine is $procs_per_machine
 
 log_dir=$run_path/$(date '+%Y-%m-%dT%H:%M')/machine$m # in the eval folder
