@@ -1,0 +1,1 @@
+{"train_loss": {}, "test_loss": {}, "test_acc": {}, "validation_loss": {}, "validation_acc": {}, "total_bytes": {"1": 125, "2": 719404, "3": 1079037, "4": 1438716}, "total_meta": {"1": 125, "2": 408, "3": 543, "4": 724}, "total_data_per_n": {"1": 0, "2": 718996, "3": 1078494, "4": 1437992}}
