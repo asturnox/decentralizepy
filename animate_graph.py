@@ -91,15 +91,9 @@ def update_plot(frame_number, data, scatter_plot, quiver_plot, circles, ax, colo
     return scatter_plot, quiver_plot, circles
 
 
-def main(data_path=None):
+def main(graphs_dir):
 
     data = []
-    graphs_dir = None
-    if data_path is None:
-        graphs_dir = os.path.join(os.getcwd(), ".sim") # Assume we are simulating
-    else:
-        most_recent_experiment = find_most_recent_experiment(data_path)
-        graphs_dir = os.path.join(most_recent_experiment, "machine0")
     
     last_graph_file_number = find_last_graph_file(graphs_dir)
     if last_graph_file_number is None:
@@ -143,5 +137,9 @@ def main(data_path=None):
 
 
 if __name__ == "__main__":
-    directory_path = sys.argv[1] if len(sys.argv) > 1 else None
+    directory_path = sys.argv[1] 
+    if (len(sys.argv) < 2):
+        print("Usage: python animate_graph.py <directory_path>")
+        sys.exit(1)
+        
     main(directory_path)
