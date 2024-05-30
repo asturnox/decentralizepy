@@ -121,14 +121,6 @@ class MobilityGraph:
             a set of neighbours
         """
 
-        for node in self.nodes:
-            # print debug node
-            print("uid: ", node.uid)
-            print("pos_vec: ", node.pos_vec)
-            print("mobility_prob_vec: ", node.mobility_prob_vec)
-            print("velocity: ", node.velocity)
-            print("coverage_area_radius: ", node.coverage_area_radius)
-
         neighbours = set()
         for node in self.nodes:
             if node.uid == uid:

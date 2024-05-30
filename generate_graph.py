@@ -109,6 +109,10 @@ if __name__ == "__main__":
                 velocity_min = size * velocity_step
 
             velocity = rng.uniform(velocity_min, velocity_min + (size * velocity_step)) * velocity_mul
+            if velocity > size:
+                # sanity check 
+                print(f"Velocity too high: {velocity}, {size}")
+                sys.exit(1)
 
             coverage_area_radius = 45
 
