@@ -11,6 +11,22 @@ from decentralizepy.graphs.Star import Star
 
 import numpy as np
 
+def simulate_graph(file_path: str) -> list[MobilityGraph]: 
+    iterations = 1000
+
+    g = MobilityGraph()
+    g.read_graph_from_file(file_path)
+
+    stripped_file_name = file_path.split("/")[-1]
+    graphs = [g]
+    
+    for i in range(iterations):
+        new_graph = graphs[-1].next_graph(i)
+        graphs.append(new_graph)
+        new_graph.write_graph_to_file(f'.sim/graph_{i}.txt')
+
+    return graphs
+
 if __name__ == "__main__":
     """
     Script to generate a graph file.
@@ -41,41 +57,9 @@ if __name__ == "__main__":
         Prints this help message
 
     """
-    __doc__ = "Usage: python3 generate_graph.py -g <graph_type> -n <num_nodes> -s <seed> -d <degree> -k <k_over_2> -b <beta> -f <file_name> -a -h"
-    assert __doc__
-    argumentList = sys.argv[1:]
-
-    options = "hg:n:s:d:k:b:f:a"
-    long_options = [
-        "file=",
-        "iterations=",
-    ]
-
-    try:
-        arguments, values = getopt.getopt(argumentList, options, long_options)
-
-        file_path = "graph.txt"
-        iterations = 1000
-        for currentArgument, currentValue in arguments:
-            if currentArgument in ("-f", "--file"):
-                file_path = currentValue
-            elif currentArgument in ("-i", "--iterations"):
-                iterations = int(currentValue)
-            else: # pragma: no cover
-                print("Unknown argument. " + __doc__)
-                sys.exit(2)
-
-        g = MobilityGraph()
-        g.read_graph_from_file(file_path)
-
-        stripped_file_name = file_path.split("/")[-1]
-        graphs = [g]
-        
-        for i in range(iterations):
-            new_graph = graphs[-1].next_graph(i)
-            graphs.append(new_graph)
-            new_graph.write_graph_to_file(f'.sim/graph_{i}.txt')
-
-    except getopt.error as err:
-        print(str(err))
+    if len(sys.argv) == 1:
+        print("No arguments provided. " + __doc__)
         sys.exit(2)
+
+    file_path = sys.argv[1]
+    simulate_graph(file_path)
