@@ -64,7 +64,7 @@ if __name__ == "__main__":
         file_name = None
         # Defaults for convenience
         num_nodes = 128
-        size = 100
+        size = 500
         velocity_step = 0.2
         high_mobility_proportion = 0.2
 
@@ -110,7 +110,7 @@ if __name__ == "__main__":
 
             velocity = rng.uniform(velocity_min, velocity_min + (size * velocity_step)) * velocity_mul
 
-            coverage_area_radius = 15
+            coverage_area_radius = 45
 
             node = MobilityNode(i, pos_vec, mobility_prob_vec, velocity, coverage_area_radius)
             nodes.append(node)

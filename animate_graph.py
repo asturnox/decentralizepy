@@ -91,10 +91,16 @@ def update_plot(frame_number, data, scatter_plot, quiver_plot, circles, ax, colo
     return scatter_plot, quiver_plot, circles
 
 
-def main(data_path):
+def main(data_path=None):
+
     data = []
-    most_recent_experiment = find_most_recent_experiment(data_path)
-    graphs_dir = os.path.join(most_recent_experiment, "machine0")
+    graphs_dir = None
+    if data_path is None:
+        graphs_dir = os.path.join(os.getcwd(), ".sim") # Assume we are simulating
+    else:
+        most_recent_experiment = find_most_recent_experiment(data_path)
+        graphs_dir = os.path.join(most_recent_experiment, "machine0")
+    
     last_graph_file_number = find_last_graph_file(graphs_dir)
     if last_graph_file_number is None:
         print("No graph files found in the directory.")
@@ -124,8 +130,9 @@ def main(data_path):
     scatter_plot = ax.scatter([], [], c=[])
     quiver_plot = ax.quiver(positions[:, 0], positions[:, 1], velocity_vectors[:, 0], velocity_vectors[:, 1],
                             [i for i in range(num_points)])
-    ax.set_xlim(-50, 150)
-    ax.set_ylim(-50, 150)
+    size=500
+    ax.set_xlim(-50, size + 50)
+    ax.set_ylim(-50, size + 50) 
 
     ani = animation.FuncAnimation(
         fig, update_plot, frames=len(data), fargs=(data, scatter_plot, quiver_plot, [], ax, colors), interval=500,
@@ -136,9 +143,5 @@ def main(data_path):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python animate_graph.py <path_to_directory>")
-        sys.exit(1)
-
-    directory_path = sys.argv[1]
+    directory_path = sys.argv[1] if len(sys.argv) > 1 else None
     main(directory_path)

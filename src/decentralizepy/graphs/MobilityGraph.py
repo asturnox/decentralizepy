@@ -26,8 +26,8 @@ class MobilityGraph:
         self.n_procs = 0
         self.seed = 0
 
-        self.width = 100
-        self.height = 100
+        self.width = 500
+        self.height = 500
 
         if seed is not None:
             self.seed = seed

@@ -12,4 +12,5 @@ eval/data**
 *swp
 build
 .venv
+.sim
 **/*.log
