@@ -1,4 +1,5 @@
 import logging
+import sys
 
 import numpy as np
 
@@ -126,13 +127,30 @@ class MobilityGraph:
         """
 
         neighbours = set()
-        for node in self.nodes:
-            if node.uid == uid:
+        node = next(filter(lambda x: x.uid == uid, self.nodes))
+        for other_node in self.nodes:
+            if other_node.uid == uid:
                 continue
 
-            if np.linalg.norm(np.array(node.pos_vec) - np.array(self.nodes[uid].pos_vec)) <= self.nodes[
-                uid].coverage_area_radius:
-                neighbours.add(node.uid)
+            # Here we solve a vector equation to see if the two nodes have been within their coverage area at some point
+            P = np.array(node.previous_pos_vec) - np.array(other_node.previous_pos_vec)
+            Q = (np.array(node.pos_vec) - np.array(node.previous_pos_vec)) - (
+                        np.array(other_node.pos_vec) - np.array(other_node.previous_pos_vec))
+            R = node.coverage_area_radius
+
+            a = np.dot(Q, Q)
+            b = 2 * np.dot(P, Q)
+            c = np.dot(P, P) - R ** 2
+
+            discriminant = b ** 2 - 4 * a * c
+
+            if discriminant >= 0:
+                sqrt_discriminant = np.sqrt(discriminant)
+                t1 = (-b - sqrt_discriminant) / (2 * a)
+                t2 = (-b + sqrt_discriminant) / (2 * a)
+
+                if 0 <= t1 <= 1 or 0 <= t2 <= 1:
+                    neighbours.add(other_node.uid)
 
         return neighbours
 
