@@ -116,7 +116,7 @@ if __name__ == "__main__":
 
             coverage_area_radius = 45
 
-            node = MobilityNode(i, pos_vec, mobility_prob_vec, velocity, coverage_area_radius)
+            node = MobilityNode(i, pos_vec, pos_vec, mobility_prob_vec, velocity, coverage_area_radius)
             nodes.append(node)
 
         g = MobilityGraph(seed, nodes=nodes)

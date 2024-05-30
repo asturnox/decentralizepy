@@ -70,6 +70,9 @@ class MobilityGraph:
                 pos_vec = tuple(map(float, line.strip().split()))
                 assert len(pos_vec) == 2, "Position vector must have 2 elements"
 
+                previous_pos_vec = tuple(map(float, inf.readline().strip().split()))
+                assert len(previous_pos_vec) == 2, "Previous position vector must have 2 elements"
+
                 line = inf.readline()
                 mobility_prob_vec = tuple(map(float, line.strip().split()))
                 assert len(mobility_prob_vec) == 4, "Mobility probability vector must have 4 elements"
@@ -80,7 +83,7 @@ class MobilityGraph:
                 line = inf.readline()
                 coverage_area_radius = float(line.strip())
 
-                node = MobilityNode(uid, pos_vec, mobility_prob_vec, velocity, coverage_area_radius)
+                node = MobilityNode(uid, pos_vec, previous_pos_vec, mobility_prob_vec, velocity, coverage_area_radius)
                 nodes.append(node)
 
                 uid += 1
@@ -102,6 +105,7 @@ class MobilityGraph:
             of.write(str(self.seed) + "\n")
             for node in self.nodes:
                 of.write(" ".join(map(str, node.pos_vec)) + "\n")
+                of.write(" ".join(map(str, node.previous_pos_vec)) + "\n")
                 of.write(" ".join(map(str, node.mobility_prob_vec)) + "\n")
                 of.write(str(node.velocity) + "\n")
                 of.write(str(node.coverage_area_radius) + "\n")

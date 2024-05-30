@@ -10,7 +10,7 @@ class MobilityNode:
     This class defines the node in the graph topology.
     """
 
-    def __init__(self, uid: int, pos_vec: Tuple[float, float], mobility_prob_vec: Tuple[float, float, float, float],
+    def __init__(self, uid: int, pos_vec: Tuple[float, float], previous_pos_vec: Tuple[float, float], mobility_prob_vec: Tuple[float, float, float, float],
                  velocity: float,
                  coverage_area_radius: float):
         """
@@ -32,6 +32,7 @@ class MobilityNode:
         """
         self.uid = uid
         self.pos_vec = pos_vec
+        self.previous_pos_vec = previous_pos_vec
         self.mobility_prob_vec = mobility_prob_vec
         self.velocity = velocity
         self.coverage_area_radius = coverage_area_radius
@@ -55,7 +56,8 @@ class MobilityNode:
             pos_vec[0] = (pos_vec[0] + self.velocity) % width
 
         new_pos_vec = tuple(pos_vec)
-        return MobilityNode(self.uid, new_pos_vec, self.mobility_prob_vec, self.velocity,
+        old_pos_vec = tuple(list(self.pos_vec))
+        return MobilityNode(self.uid, new_pos_vec, old_pos_vec, self.mobility_prob_vec, self.velocity,
                             self.coverage_area_radius)
 
 
