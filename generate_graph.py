@@ -65,7 +65,7 @@ if __name__ == "__main__":
         # Defaults for convenience
         num_nodes = 128
         size = 500
-        velocity_step = 0.2
+        velocity_step = 0.1
         high_mobility_proportion = 0.2
 
         for currentArgument, currentValue in arguments:

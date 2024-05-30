@@ -15,7 +15,7 @@ cp $graph $config_file $run_path
 env_python=../.venv/bin/python3 # Path to python executable of the environment | conda recommended
 machines=1 # number of machines in the runtime
 eval_file=$decpy_path/testingPeerSamplerDynamic.py # decentralized driver code (run on each machine)
-log_level=DEBUG # DEBUG | INFO | WARN | CRITICAL
+log_level=INFO # DEBUG | INFO | WARN | CRITICAL
 
 m=0 # machine id corresponding consistent with ip.json
 echo M is $m
