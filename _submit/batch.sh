@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+# NOTE: Might need /sh instead
 #
 #SBATCH --job-name="decentralizepy"
 #SBATCH --partition=compute
@@ -7,4 +8,5 @@
 #SBATCH --cpus-per-task=24
 #SBATCH --mem-per-cpu=4G
 
-srun deploy.sh
+# srun deploy.sh
+tmux new -d "./deploy.sh \; pipe-pane 'cat > log.txt'"
