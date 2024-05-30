@@ -2,4 +2,4 @@
 
 python -m venv .venv
 source .venv/bin/activate
-python -m pip install --editable --user .[dev]
+python -m pip install --editable .[dev]
