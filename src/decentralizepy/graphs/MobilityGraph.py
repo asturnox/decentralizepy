@@ -1,5 +1,6 @@
 import logging
 import sys
+from collections import defaultdict
 
 import numpy as np
 
@@ -26,6 +27,7 @@ class MobilityGraph:
         self.nodes: list[MobilityNode] = []
         self.n_procs = 0
         self.seed = 0
+        self.neighbours_cache = defaultdict(set)
 
         self.width = 500
         self.height = 500
@@ -131,33 +133,23 @@ class MobilityGraph:
         set(int)
             a set of neighbours
         """
+        if uid in self.neighbours_cache:
+            return self.neighbours_cache[uid]
 
         neighbours = set()
-        node = next(filter(lambda x: x.uid == uid, self.nodes))
+        node: MobilityNode = next(filter(lambda x: x.uid == uid, self.nodes))
+        sim_path_points = node.get_sim_path_points(self.width, self.height)
+        r = node.coverage_area_radius
         for other_node in self.nodes:
             if other_node.uid == uid:
                 continue
 
-            # Here we solve a vector equation to see if the two nodes have been within their coverage area at some point
-            P = np.array(node.previous_pos_vec) - np.array(other_node.previous_pos_vec)
-            Q = (np.array(node.pos_vec) - np.array(node.previous_pos_vec)) - (
-                    np.array(other_node.pos_vec) - np.array(other_node.previous_pos_vec))
-            R = node.coverage_area_radius
+            for q in other_node.get_sim_path_points(self.width, self.height):
+                for p in sim_path_points:
+                    if np.linalg.norm(p - q) <= r:
+                        neighbours.add(other_node.uid)
 
-            a = np.dot(Q, Q)
-            b = 2 * np.dot(P, Q)
-            c = np.dot(P, P) - R ** 2
-
-            discriminant = b ** 2 - 4 * a * c
-
-            if discriminant >= 0:
-                sqrt_discriminant = np.sqrt(discriminant)
-                t1 = (-b - sqrt_discriminant) / (2 * a)
-                t2 = (-b + sqrt_discriminant) / (2 * a)
-
-                if 0 <= t1 <= 1 or 0 <= t2 <= 1:
-                    neighbours.add(other_node.uid)
-
+        self.neighbours_cache[uid] = neighbours
         return neighbours
 
     def next_graph(self, iteration: int):

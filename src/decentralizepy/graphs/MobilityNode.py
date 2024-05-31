@@ -48,7 +48,7 @@ class MobilityNode:
         self.mobility_prob_vec = mobility_prob_vec
         self.velocity = velocity
         self.coverage_area_radius = coverage_area_radius
-        self.sim_path_points = None
+        self.sim_path_points_cache = None
 
     def advance(self, seed: int, iteration: int, width: int, height: int):
         """
@@ -81,8 +81,33 @@ class MobilityNode:
         return MobilityNode(self.uid, new_pos_vec, direction, old_pos_vec, self.mobility_prob_vec, self.velocity,
                             self.coverage_area_radius)
 
-    def get_sim_path_points(self) -> set[tuple[float, float]]:
-        if self.sim_path_points is not None:
-            return self.sim_path_points
+    def get_sim_path_points(self, width: int, height: int) -> list[tuple[float, float]]:
+        def velocity_vec():
+            if self.previous_dir == Direction.UP:
+                return np.array([0, self.velocity])
+            elif self.previous_dir == Direction.DOWN:
+                return np.array([0, -self.velocity])
+            elif self.previous_dir == Direction.LEFT:
+                return np.array([-self.velocity, 0])
+            elif self.previous_dir == Direction.RIGHT:
+                return np.array([self.velocity, 0])
+            else:
+                raise ValueError
 
-        return None
+        if self.sim_path_points_cache is not None:
+            return self.sim_path_points_cache
+
+        sim_path_points = []
+        time_steps = 100
+        dt = 1.0 / time_steps
+        v = velocity_vec()
+        p = np.array(self.previous_pos_vec)
+        for t in range(time_steps):
+            if p[0] < 0 or p[0] > width or p[1] < 0 or p[1] > height:
+                v *= -1
+
+            p += (v * dt)
+            sim_path_points.append(p)
+
+        self.sim_path_points_cache = sim_path_points
+        return sim_path_points
