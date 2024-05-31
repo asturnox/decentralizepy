@@ -47,13 +47,21 @@ class MobilityNode:
         direction = rng.choice(dirs, p=self.mobility_prob_vec)
         pos_vec = list(self.pos_vec)
         if direction == Direction.UP:
-            pos_vec[1] = (pos_vec[1] + self.velocity) % height
+            unbounded_pos = pos_vec[1] + self.velocity
+            excess = max(0, unbounded_pos - height)
+            pos_vec[1] = min(unbounded_pos, height) - excess
         elif direction == Direction.DOWN:
-            pos_vec[1] = (pos_vec[1] - self.velocity) % height
+            unbounded_pos = pos_vec[1] - self.velocity
+            excess = max(0, 0 - unbounded_pos)
+            pos_vec[1] = max(unbounded_pos, 0) + excess
         elif direction == Direction.LEFT:
-            pos_vec[0] = (pos_vec[0] - self.velocity) % width
+            unbounded_pos = pos_vec[0] - self.velocity
+            excess = max(0, 0 - unbounded_pos)
+            pos_vec[0] = max(unbounded_pos, 0) + excess
         elif direction == Direction.RIGHT:
-            pos_vec[0] = (pos_vec[0] + self.velocity) % width
+            unbounded_pos = pos_vec[0] + self.velocity
+            excess = max(0, unbounded_pos - width)
+            pos_vec[0] = min(unbounded_pos, width) - excess
 
         new_pos_vec = tuple(pos_vec)
         old_pos_vec = tuple(list(self.pos_vec))
