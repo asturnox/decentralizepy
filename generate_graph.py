@@ -93,7 +93,7 @@ if __name__ == "__main__":
             pos_vec = (rng.uniform(0, size), rng.uniform(0, size))
 
             mobility_prob_vec = (rng.uniform(0, 1), rng.uniform(0, 1), rng.uniform(0, 1), rng.uniform(0, 1))
-            mobility_prob_vec = tuple([x / sum(mobility_prob_vec) for x in mobility_prob_vec])
+            mobility_prob_vec = tuple([0.25 for _ in range(4)])
 
             velocity_min = 0
             velocity_mul = 1

@@ -54,7 +54,7 @@ class MobilityNode:
         """
         Returns a copy of the node after advancing it by one step
         """
-        rng = np.random.default_rng(seed + 10000 * iteration)
+        rng = np.random.default_rng(seed + (10000 * iteration * self.uid))
 
         dirs = list(Direction)
         direction = rng.choice(dirs, p=self.mobility_prob_vec)
@@ -98,7 +98,7 @@ class MobilityNode:
             return self.sim_path_points_cache
 
         sim_path_points = []
-        time_steps = 100
+        time_steps = 10
         dt = 1.0 / time_steps
         v = velocity_vec()
         p = np.array(self.previous_pos_vec)

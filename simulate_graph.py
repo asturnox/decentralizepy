@@ -17,7 +17,6 @@ def simulate_graph(file_path: str) -> list[MobilityGraph]:
     g = MobilityGraph()
     g.read_graph_from_file(file_path)
 
-    stripped_file_name = file_path.split("/")[-1]
     graphs = [g]
     
     for i in range(iterations):

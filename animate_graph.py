@@ -129,7 +129,7 @@ def main(graphs_dir):
     ax.set_ylim(-50, size + 50) 
 
     ani = animation.FuncAnimation(
-        fig, update_plot, frames=len(data), fargs=(data, scatter_plot, quiver_plot, [], ax, colors), interval=500,
+        fig, update_plot, frames=len(data), fargs=(data, scatter_plot, quiver_plot, [], ax, colors), interval=200,
         repeat=False
     )
 

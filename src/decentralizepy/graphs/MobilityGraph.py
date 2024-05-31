@@ -143,11 +143,17 @@ class MobilityGraph:
         for other_node in self.nodes:
             if other_node.uid == uid:
                 continue
+            other_sim_path_points = other_node.get_sim_path_points(self.width, self.height)
 
-            for q in other_node.get_sim_path_points(self.width, self.height):
-                for p in sim_path_points:
-                    if np.linalg.norm(p - q) <= r:
-                        neighbours.add(other_node.uid)
+            assert len(sim_path_points) == len(other_sim_path_points)
+            N = len(sim_path_points)
+            for i in range(N):
+                p = sim_path_points[i]
+                q = other_sim_path_points[i]
+
+                if np.linalg.norm(p - q) <= r:
+                    neighbours.add(other_node.uid)
+                    break
 
         self.neighbours_cache[uid] = neighbours
         return neighbours
