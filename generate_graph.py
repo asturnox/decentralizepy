@@ -1,13 +1,8 @@
 import getopt
 import sys
 
-from decentralizepy.graphs.FullyConnected import FullyConnected
 from decentralizepy.graphs.MobilityGraph import MobilityGraph
-from decentralizepy.graphs.MobilityNode import MobilityNode
-from decentralizepy.graphs.Regular import Regular
-from decentralizepy.graphs.Ring import Ring
-from decentralizepy.graphs.SmallWorld import SmallWorld
-from decentralizepy.graphs.Star import Star
+from decentralizepy.graphs.MobilityNode import MobilityNode, Direction
 
 import numpy as np
 
@@ -116,7 +111,7 @@ if __name__ == "__main__":
 
             coverage_area_radius = 45
 
-            node = MobilityNode(i, pos_vec, pos_vec, mobility_prob_vec, velocity, coverage_area_radius)
+            node = MobilityNode(i, pos_vec, Direction.UP, pos_vec, mobility_prob_vec, velocity, coverage_area_radius)
             nodes.append(node)
 
         g = MobilityGraph(seed, nodes=nodes)

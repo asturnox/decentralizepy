@@ -5,12 +5,23 @@ from typing import Tuple, Type
 import numpy as np
 
 
+class Direction(Enum):
+    """
+    Enum for the direction of the node
+    """
+    UP = 0
+    DOWN = 1
+    LEFT = 2
+    RIGHT = 3
+
+
 class MobilityNode:
     """
     This class defines the node in the graph topology.
     """
 
-    def __init__(self, uid: int, pos_vec: Tuple[float, float], previous_pos_vec: Tuple[float, float], mobility_prob_vec: Tuple[float, float, float, float],
+    def __init__(self, uid: int, pos_vec: Tuple[float, float], previous_dir: Direction,
+                 previous_pos_vec: Tuple[float, float], mobility_prob_vec: Tuple[float, float, float, float],
                  velocity: float,
                  coverage_area_radius: float):
         """
@@ -33,9 +44,11 @@ class MobilityNode:
         self.uid = uid
         self.pos_vec = pos_vec
         self.previous_pos_vec = previous_pos_vec
+        self.previous_dir = previous_dir
         self.mobility_prob_vec = mobility_prob_vec
         self.velocity = velocity
         self.coverage_area_radius = coverage_area_radius
+        self.sim_path_points = None
 
     def advance(self, seed: int, iteration: int, width: int, height: int):
         """
@@ -65,15 +78,11 @@ class MobilityNode:
 
         new_pos_vec = tuple(pos_vec)
         old_pos_vec = tuple(list(self.pos_vec))
-        return MobilityNode(self.uid, new_pos_vec, old_pos_vec, self.mobility_prob_vec, self.velocity,
+        return MobilityNode(self.uid, new_pos_vec, direction, old_pos_vec, self.mobility_prob_vec, self.velocity,
                             self.coverage_area_radius)
 
+    def get_sim_path_points(self) -> set[tuple[float, float]]:
+        if self.sim_path_points is not None:
+            return self.sim_path_points
 
-class Direction(Enum):
-    """
-    Enum for the direction of the node
-    """
-    UP = 0
-    DOWN = 1
-    LEFT = 2
-    RIGHT = 3
+        return None

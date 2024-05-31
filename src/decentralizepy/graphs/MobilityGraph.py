@@ -3,7 +3,7 @@ import sys
 
 import numpy as np
 
-from decentralizepy.graphs.MobilityNode import MobilityNode
+from decentralizepy.graphs.MobilityNode import MobilityNode, Direction
 
 
 class MobilityGraph:
@@ -71,6 +71,10 @@ class MobilityGraph:
                 pos_vec = tuple(map(float, line.strip().split()))
                 assert len(pos_vec) == 2, "Position vector must have 2 elements"
 
+                line = inf.readline()
+                dir = Direction(int(line.strip()))
+                assert dir is not None, f"Invalid dir {dir}"
+
                 previous_pos_vec = tuple(map(float, inf.readline().strip().split()))
                 assert len(previous_pos_vec) == 2, "Previous position vector must have 2 elements"
 
@@ -84,7 +88,8 @@ class MobilityGraph:
                 line = inf.readline()
                 coverage_area_radius = float(line.strip())
 
-                node = MobilityNode(uid, pos_vec, previous_pos_vec, mobility_prob_vec, velocity, coverage_area_radius)
+                node = MobilityNode(uid, pos_vec, dir, previous_pos_vec, mobility_prob_vec, velocity,
+                                    coverage_area_radius)
                 nodes.append(node)
 
                 uid += 1
@@ -106,6 +111,7 @@ class MobilityGraph:
             of.write(str(self.seed) + "\n")
             for node in self.nodes:
                 of.write(" ".join(map(str, node.pos_vec)) + "\n")
+                of.write(str(node.previous_dir.value) + "\n")
                 of.write(" ".join(map(str, node.previous_pos_vec)) + "\n")
                 of.write(" ".join(map(str, node.mobility_prob_vec)) + "\n")
                 of.write(str(node.velocity) + "\n")
@@ -135,7 +141,7 @@ class MobilityGraph:
             # Here we solve a vector equation to see if the two nodes have been within their coverage area at some point
             P = np.array(node.previous_pos_vec) - np.array(other_node.previous_pos_vec)
             Q = (np.array(node.pos_vec) - np.array(node.previous_pos_vec)) - (
-                        np.array(other_node.pos_vec) - np.array(other_node.previous_pos_vec))
+                    np.array(other_node.pos_vec) - np.array(other_node.previous_pos_vec))
             R = node.coverage_area_radius
 
             a = np.dot(Q, Q)
