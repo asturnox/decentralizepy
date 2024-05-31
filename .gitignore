@@ -14,3 +14,4 @@ build
 .venv
 .sim
 **/*.log
+**/*.pt

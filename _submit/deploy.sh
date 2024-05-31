@@ -23,7 +23,6 @@ generate_graphs() {
 run_experiment() {
     (cd .. && generate_graphs)
 
-    echo hello
     ./run_decentralized.sh dynamic_48_0_0.txt $procs_per_machine $iterations $test_after
     ./run_decentralized.sh dynamic_48_0_05.txt $procs_per_machine $iterations $test_after
     ./run_decentralized.sh dynamic_48_0_2.txt $procs_per_machine $iterations $test_after

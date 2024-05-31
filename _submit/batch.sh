@@ -9,4 +9,4 @@
 #SBATCH --mem-per-cpu=4G
 
 # srun deploy.sh
-tmux new -d "./deploy.sh \; pipe-pane 'cat > log.txt'"
+tmux new -d "./deploy.sh" \; pipe-pane 'cat > log.txt'
