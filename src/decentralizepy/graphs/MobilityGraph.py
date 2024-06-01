@@ -145,7 +145,9 @@ class MobilityGraph:
                 continue
             other_sim_path_points = other_node.get_sim_path_points(self.width, self.height)
 
-            assert len(sim_path_points) == len(other_sim_path_points)
+            if len(sim_path_points) != len(other_sim_path_points):
+                raise ValueError("Path lengths do not match")
+            
             N = len(sim_path_points)
             for i in range(N):
                 p = sim_path_points[i]

@@ -92,7 +92,6 @@ if __name__ == "__main__":
         for i in range(num_nodes):
             pos_vec = (rng.uniform(0, size), rng.uniform(0, size))
 
-            mobility_prob_vec = (rng.uniform(0, 1), rng.uniform(0, 1), rng.uniform(0, 1), rng.uniform(0, 1))
             mobility_prob_vec = tuple([0.25 for _ in range(4)])
 
             velocity_min = 0

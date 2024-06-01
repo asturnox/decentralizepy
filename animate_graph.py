@@ -9,7 +9,7 @@ import numpy as np
 from matplotlib.patches import Circle
 
 from decentralizepy.graphs.MobilityGraph import MobilityGraph
-from decentralizepy.graphs.MobilityNode import MobilityNode, Direction
+from decentralizepy.graphs.MobilityNode import Direction
 
 
 def find_last_graph_file(directory_path):
@@ -50,11 +50,8 @@ def find_most_recent_experiment(base_directory):
         return None
 
 
-def read_coordinates_and_velocity(file_path) -> tuple[
+def read_coordinates_and_velocity(graph: MobilityGraph) -> tuple[
     list[tuple[float, float]], list[tuple[float, float]], list[float]]:
-    graph = MobilityGraph()
-    graph.read_graph_from_file(file_path)
-
     positions = []
     mobility_vecs = []
     coverage_radii = [node.coverage_area_radius for node in graph.nodes]
@@ -91,55 +88,58 @@ def update_plot(frame_number, data, scatter_plot, quiver_plot, circles, ax, colo
     return scatter_plot, quiver_plot, circles
 
 
-def main(graphs_dir):
-
+def animate_graphs(graphs: list[MobilityGraph]):
     data = []
-    
+    for graph in graphs:
+        positions, velocity_vectors, coverage_radii = read_coordinates_and_velocity(graph)
+        data.append((positions, np.array(velocity_vectors), coverage_radii))
+    if not data:
+        print("No data found in the directory.")
+        sys.exit(1)
+    # Generate a list of colors
+    positions, velocity_vectors, _ = data[0]
+    positions = np.array(positions)
+    num_points = len(positions)
+    colors = np.random.rand(num_points, 3)
+    fig, ax = plt.subplots()
+    scatter_plot = ax.scatter([], [], c=[])
+    quiver_plot = ax.quiver(positions[:, 0], positions[:, 1], velocity_vectors[:, 0], velocity_vectors[:, 1],
+                            [i for i in range(num_points)])
+    size = 500
+    ax.set_xlim(-50, size + 50)
+    ax.set_ylim(-50, size + 50)
+    ani = animation.FuncAnimation(
+        fig, update_plot, frames=len(data), fargs=(data, scatter_plot, quiver_plot, [], ax, colors), interval=1000,
+        repeat=False
+    )
+    plt.show()
+    return ani
+
+
+def main(graphs_dir):
     last_graph_file_number = find_last_graph_file(graphs_dir)
     if last_graph_file_number is None:
         print("No graph files found in the directory.")
         sys.exit(1)
 
+    graphs: list[MobilityGraph] = []
     for i in range(1, last_graph_file_number + 1):
         file_path = os.path.join(graphs_dir, f"graph_{i}.txt")
         if os.path.exists(file_path):
-            positions, velocity_vectors, coverage_radii = read_coordinates_and_velocity(file_path)
-            data.append((positions, np.array(velocity_vectors), coverage_radii))
+            g = MobilityGraph()
+            g.read_graph_from_file(file_path)
+            graphs.append(g)
         else:
             print(f"File graph_{i}.txt does not exist in the directory.")
             sys.exit(1)
 
-    if not data:
-        print("No data found in the directory.")
-        sys.exit(1)
-
-    # Generate a list of colors
-    positions, velocity_vectors, _ = data[0]
-    positions = np.array(positions)
-
-    num_points = len(positions)
-    colors = np.random.rand(num_points, 3)
-
-    fig, ax = plt.subplots()
-    scatter_plot = ax.scatter([], [], c=[])
-    quiver_plot = ax.quiver(positions[:, 0], positions[:, 1], velocity_vectors[:, 0], velocity_vectors[:, 1],
-                            [i for i in range(num_points)])
-    size=500
-    ax.set_xlim(-50, size + 50)
-    ax.set_ylim(-50, size + 50) 
-
-    ani = animation.FuncAnimation(
-        fig, update_plot, frames=len(data), fargs=(data, scatter_plot, quiver_plot, [], ax, colors), interval=200,
-        repeat=False
-    )
-
-    plt.show()
+    animate_graphs(graphs)
 
 
 if __name__ == "__main__":
-    directory_path = sys.argv[1] 
+    directory_path = sys.argv[1]
     if (len(sys.argv) < 2):
         print("Usage: python animate_graph.py <directory_path>")
         sys.exit(1)
-        
+
     main(directory_path)
