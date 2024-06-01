@@ -11,21 +11,20 @@ from decentralizepy.graphs.Star import Star
 
 import numpy as np
 
-def simulate_graph(file_path: str) -> list[MobilityGraph]: 
-    iterations = 1000
 
+def simulate_graph(file_path: str, iterations=1000) -> list[MobilityGraph]:
     g = MobilityGraph()
     g.read_graph_from_file(file_path)
 
-    stripped_file_name = file_path.split("/")[-1]
     graphs = [g]
-    
+
     for i in range(iterations):
         new_graph = graphs[-1].next_graph(i)
         graphs.append(new_graph)
         new_graph.write_graph_to_file(f'.sim/graph_{i}.txt')
 
     return graphs
+
 
 if __name__ == "__main__":
     """

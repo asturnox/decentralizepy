@@ -1,9 +1,10 @@
 import logging
 import sys
+from collections import defaultdict
 
 import numpy as np
 
-from decentralizepy.graphs.MobilityNode import MobilityNode
+from decentralizepy.graphs.MobilityNode import MobilityNode, Direction
 
 
 class MobilityGraph:
@@ -26,6 +27,7 @@ class MobilityGraph:
         self.nodes: list[MobilityNode] = []
         self.n_procs = 0
         self.seed = 0
+        self.neighbours_cache = defaultdict(set)
 
         self.width = 500
         self.height = 500
@@ -71,6 +73,10 @@ class MobilityGraph:
                 pos_vec = tuple(map(float, line.strip().split()))
                 assert len(pos_vec) == 2, "Position vector must have 2 elements"
 
+                line = inf.readline()
+                dir = Direction(int(line.strip()))
+                assert dir is not None, f"Invalid dir {dir}"
+
                 previous_pos_vec = tuple(map(float, inf.readline().strip().split()))
                 assert len(previous_pos_vec) == 2, "Previous position vector must have 2 elements"
 
@@ -84,7 +90,8 @@ class MobilityGraph:
                 line = inf.readline()
                 coverage_area_radius = float(line.strip())
 
-                node = MobilityNode(uid, pos_vec, previous_pos_vec, mobility_prob_vec, velocity, coverage_area_radius)
+                node = MobilityNode(uid, pos_vec, dir, previous_pos_vec, mobility_prob_vec, velocity,
+                                    coverage_area_radius)
                 nodes.append(node)
 
                 uid += 1
@@ -106,6 +113,7 @@ class MobilityGraph:
             of.write(str(self.seed) + "\n")
             for node in self.nodes:
                 of.write(" ".join(map(str, node.pos_vec)) + "\n")
+                of.write(str(node.previous_dir.value) + "\n")
                 of.write(" ".join(map(str, node.previous_pos_vec)) + "\n")
                 of.write(" ".join(map(str, node.mobility_prob_vec)) + "\n")
                 of.write(str(node.velocity) + "\n")
@@ -125,33 +133,31 @@ class MobilityGraph:
         set(int)
             a set of neighbours
         """
+        if uid in self.neighbours_cache:
+            return self.neighbours_cache[uid]
 
         neighbours = set()
-        node = next(filter(lambda x: x.uid == uid, self.nodes))
+        node: MobilityNode = next(filter(lambda x: x.uid == uid, self.nodes))
+        sim_path_points = node.get_sim_path_points(self.width, self.height)
+        r = node.coverage_area_radius
         for other_node in self.nodes:
             if other_node.uid == uid:
                 continue
+            other_sim_path_points = other_node.get_sim_path_points(self.width, self.height)
 
-            # Here we solve a vector equation to see if the two nodes have been within their coverage area at some point
-            P = np.array(node.previous_pos_vec) - np.array(other_node.previous_pos_vec)
-            Q = (np.array(node.pos_vec) - np.array(node.previous_pos_vec)) - (
-                        np.array(other_node.pos_vec) - np.array(other_node.previous_pos_vec))
-            R = node.coverage_area_radius
+            if len(sim_path_points) != len(other_sim_path_points):
+                raise ValueError("Path lengths do not match")
+            
+            N = len(sim_path_points)
+            for i in range(N):
+                p = sim_path_points[i]
+                q = other_sim_path_points[i]
 
-            a = np.dot(Q, Q)
-            b = 2 * np.dot(P, Q)
-            c = np.dot(P, P) - R ** 2
-
-            discriminant = b ** 2 - 4 * a * c
-
-            if discriminant >= 0:
-                sqrt_discriminant = np.sqrt(discriminant)
-                t1 = (-b - sqrt_discriminant) / (2 * a)
-                t2 = (-b + sqrt_discriminant) / (2 * a)
-
-                if 0 <= t1 <= 1 or 0 <= t2 <= 1:
+                if np.linalg.norm(p - q) <= r:
                     neighbours.add(other_node.uid)
+                    break
 
+        self.neighbours_cache[uid] = neighbours
         return neighbours
 
     def next_graph(self, iteration: int):
