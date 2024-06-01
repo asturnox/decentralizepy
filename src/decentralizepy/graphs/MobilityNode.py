@@ -58,28 +58,26 @@ class MobilityNode:
             combined = (base_seed,) + args
             return hash(combined) % (2**32)
         
+        def maybe_reflect_pos(pos, size):
+            if pos < 0:
+                return -pos
+            elif pos > size:
+                return 2 * size - pos
+            return pos
+        
         rng = np.random.default_rng(generate_seed(seed, iteration, self.uid))
-        # rng = np.random.default_rng()
 
         dirs = list(Direction)
         direction = rng.choice(dirs, p=self.mobility_prob_vec)
         pos_vec = list(self.pos_vec)
         if direction == Direction.UP:
-            unbounded_pos = pos_vec[1] + self.velocity
-            excess = max(0, unbounded_pos - height)
-            pos_vec[1] = min(unbounded_pos, height) - excess
+            pos_vec[1] = maybe_reflect_pos(pos_vec[1] + self.velocity, height)
         elif direction == Direction.DOWN:
-            unbounded_pos = pos_vec[1] - self.velocity
-            excess = max(0, 0 - unbounded_pos)
-            pos_vec[1] = max(unbounded_pos, 0) + excess
+            pos_vec[1] = maybe_reflect_pos(pos_vec[1] - self.velocity, height)
         elif direction == Direction.LEFT:
-            unbounded_pos = pos_vec[0] - self.velocity
-            excess = max(0, 0 - unbounded_pos)
-            pos_vec[0] = max(unbounded_pos, 0) + excess
+            pos_vec[0] = maybe_reflect_pos(pos_vec[0] - self.velocity, width)
         elif direction == Direction.RIGHT:
-            unbounded_pos = pos_vec[0] + self.velocity
-            excess = max(0, unbounded_pos - width)
-            pos_vec[0] = min(unbounded_pos, width) - excess
+            pos_vec[0] = maybe_reflect_pos(pos_vec[0] + self.velocity, width)
 
         new_pos_vec = tuple(pos_vec)
         old_pos_vec = tuple(list(self.pos_vec))
