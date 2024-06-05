@@ -391,6 +391,7 @@ class CNN(Model):
         self.fc2 = nn.Linear(120, 84)
         self.fc3 = nn.Linear(84, NUM_CLASSES)
 
+
     def forward(self, x):
         """
         Forward pass of the model
