@@ -80,6 +80,12 @@ class PlainAverageSharing(Sharing):
         pass
 
     def _averaging(self, peer_deques):
+        if len(peer_deques) == 0:
+            self.model.load_state_dict(self.model.state_dict())
+            self._post_step()
+            self.communication_round += 1
+            return
+
         """
         Averages the received model with the local model
 
