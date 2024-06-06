@@ -1,3 +1,5 @@
+import numpy as np
+
 from decentralizepy.sharing.Sharing import Sharing
 from decentralizepy.graphs.MobilityGraph import MobilityGraph
 from scipy.special import softmax
@@ -48,6 +50,8 @@ class MobilityAwareSharing(Sharing):
 
         """
 
+        print("MobilityAwareSharing constructor called alpha: ", alpha)
+
         super().__init__(
             rank,
             machine_id,
@@ -82,7 +86,8 @@ class MobilityAwareSharing(Sharing):
         with torch.no_grad():
             total = dict()
 
-            own_dv = self.velocity_map[self.uid] - known_velocity_avg
+            # own_dv = self.alpha * (self.velocity_map[self.uid])
+            own_dv = self.velocity_map[self.uid]
             own_data = self.model.state_dict()
 
             data_lst = [own_data]
@@ -94,17 +99,19 @@ class MobilityAwareSharing(Sharing):
                 del data["iteration"]
                 del data["CHANNEL"]
                 logging.info(
-                    "Averaging model from neighbor {} of iteration {} velocity".format(
+                    "Averaging model from neighbor {} of iteration {} velocity {}".format(
                         n, iteration, self.velocity_map[n]
                     )
                 )
                 data = self.deserialized_model(data)
 
-                dv = self.velocity_map[n] - known_velocity_avg
+                # dv = self.alpha * (self.velocity_map[n])
+                dv = self.velocity_map[n]
                 data_lst.append(data)
                 dv_lst.append(dv)
 
-            norm_dv = softmax(dv_lst)
+            # norm_dv = softmax(dv_lst)
+            norm_dv = np.array(dv_lst) / np.sum(dv_lst)
             data_dv = zip(data_lst, norm_dv)
 
             logging.info("Averaging model")
