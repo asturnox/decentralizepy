@@ -6,8 +6,8 @@ source .venv/bin/activate
 
 cd tutorial/
 
-iterations=1000
-test_after=10
+iterations=5000
+test_after=50
 procs_per_machine=48
 
 generate_graphs() {
@@ -34,13 +34,13 @@ run_experiment() {
 
 run_experiment ;
 
-run_experiment ;
+# run_experiment ;
 
-run_experiment ;
+# run_experiment ;
 
-run_experiment ;
+# run_experiment ;
 
-run_experiment ;
+# run_experiment ;
 
 # Shutdown
 sudo shutdown -h now
