@@ -1,11 +1,12 @@
+from datetime import datetime, time
 import logging
+from pathos.multiprocessing import ProcessingPool as Pool
 import sys
 from collections import defaultdict
 
 import numpy as np
 
 from decentralizepy.graphs.MobilityNode import MobilityNode, Direction
-
 
 class MobilityGraph:
     """
@@ -119,6 +120,35 @@ class MobilityGraph:
                 of.write(str(node.velocity) + "\n")
                 of.write(str(node.coverage_area_radius) + "\n")
 
+    def sync_precompute_neighbours(self):
+        """
+        Synchronously precomputes the neighbours of all nodes in the graph
+        """
+        # Precompute the path points for all nodes
+        sim_path_points = [node.get_sim_path_points(self.width, self.height) for node in self.nodes]
+        for i, node in enumerate(self.nodes):
+            node.sim_path_points_cache = sim_path_points[i]
+        # print("sim_path_points:", sim_path_points)
+
+        # Compute neighbours
+        for node in self.nodes:
+            self.neighbors(node.uid)
+
+    def precompute_neighbours(self) -> list:
+        """
+        Computes the neighbours of all nodes in the graph in parallel
+        """
+        t_start = datetime.now()
+
+        with Pool() as p:
+            res = p.map(lambda x: (x.uid, self.neighbors(x.uid)), self.nodes)
+            self.neighbours_cache = dict(res)
+
+        t_end = datetime.now()
+        print("Time taken to precompute neighbours:", t_end - t_start)
+
+        return self.neighbours_cache
+
     def neighbors(self, uid):
         """
         Gives the neighbors of a node
@@ -147,7 +177,7 @@ class MobilityGraph:
 
             if len(sim_path_points) != len(other_sim_path_points):
                 raise ValueError("Path lengths do not match")
-            
+
             N = len(sim_path_points)
             for i in range(N):
                 p = sim_path_points[i]
