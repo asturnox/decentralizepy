@@ -178,14 +178,19 @@ class MobilityGraph:
             if len(sim_path_points) != len(other_sim_path_points):
                 raise ValueError("Path lengths do not match")
 
-            N = len(sim_path_points)
-            for i in range(N):
-                p = sim_path_points[i]
-                q = other_sim_path_points[i]
+            # N = len(sim_path_points)
+            # for i in range(N):
+            #     p = sim_path_points[i]
+            #     q = other_sim_path_points[i]
 
-                if np.linalg.norm(p - q) <= r:
-                    neighbours.add(other_node.uid)
-                    break
+            #     if np.linalg.norm(p - q) <= r:
+            #         neighbours.add(other_node.uid)
+            #         break
+            #     neighbours.add(other_node.uid)
+            
+            diff_v = np.array(sim_path_points) - np.array(other_sim_path_points)
+            if np.any(np.linalg.norm(diff_v, axis=1) <= r):
+                neighbours.add(other_node.uid)
 
         self.neighbours_cache[uid] = neighbours
         return neighbours
