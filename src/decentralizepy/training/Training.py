@@ -101,7 +101,7 @@ class Training:
         logging.info("Loss after iteration: {}".format(loss))
         return loss
 
-    def trainstep(self, data, target):
+    def trainstep(self, data, target, grad=None):
         """
         One training step on a minibatch.
 
@@ -119,11 +119,16 @@ class Training:
 
         """
         self.model.zero_grad()
-        output = self.model(data)
-        loss_val = self.loss(output, target)
-        loss_val.backward()
+
+        if grad is None:
+            output = self.model(data)
+            loss_val = self.loss(output, target)
+            loss_val.backward()
+        else:
+            for name, param in self.model.named_parameters():
+                param.grad = grad[name]
+
         self.optimizer.step()
-        return loss_val.item()
 
     def train_full(self, dataset):
         """
@@ -150,7 +155,7 @@ class Training:
                 count += 1
             logging.debug("Epoch: {} loss: {}".format(epoch, epoch_loss / count))
 
-    def train(self, dataset):
+    def train(self, dataset, grads=None):
         """
         One training iteration
 
@@ -170,8 +175,56 @@ class Training:
             trainset = dataset.get_trainset(self.batch_size, self.shuffle)
             while count < self.rounds:
                 for data, target in trainset:
-                    iter_loss += self.trainstep(data, target)
+                    grad = None
+                    if grads is not None:
+                        grad = grads[count]
+
+                    self.trainstep(data, target, grad)
                     count += 1
-                    logging.debug("Round: {} loss: {}".format(count, iter_loss / count))
+                    logging.debug("Round: {}".format(count))
                     if count >= self.rounds:
                         break
+
+    def compute_stochastic_gradient(self, data, target):
+        self.model.zero_grad()
+        output = self.model(data)
+        loss_val = self.loss(output, target)
+        loss_val.backward()
+
+        # Retrieve the gradients for each parameter
+        gradients = {name: param.grad.clone() for name, param in self.model.named_parameters()}
+
+        return gradients
+
+    # def average_gradients(self, gradient_list):
+    #     average_gradients = {}
+    #     num_gradients = len(gradient_list)
+    #
+    #     for key in gradient_list[0].keys():
+    #         avg = sum(grad[key] for grad in gradient_list) / num_gradients
+    #         average_gradients[key] = avg
+    #
+    #     return average_gradients
+
+    def compute_stochastic_gradients(self, dataset):
+        self.model.train()
+
+        if self.full_epochs:
+            self.train_full(dataset)
+        else:
+            count = 0
+
+            all_gradients = []
+            trainset = dataset.get_trainset(self.batch_size, self.shuffle)
+            while count < self.rounds:
+                for data, target in trainset:
+                    grad = self.compute_stochastic_gradient(data, target)
+                    all_gradients.append(grad)
+
+                    count += 1
+                    logging.debug("Round: {}".format(count))
+                    if count >= self.rounds:
+                        break
+
+            # average_gradients = self.average_gradients(all_gradients)
+            return all_gradients

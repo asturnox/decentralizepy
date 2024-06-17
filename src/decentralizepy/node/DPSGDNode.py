@@ -69,7 +69,7 @@ class DPSGDNode(Node):
             rounds_to_test -= 1
 
             self.iteration = iteration
-            self.trainer.train(self.dataset)
+            model_grads = self.trainer.compute_stochastic_gradients(self.dataset) # Only calculate gradients
 
             new_neighbors = self.get_neighbors()
 
@@ -119,6 +119,9 @@ class DPSGDNode(Node):
             logging.debug("Averaging")
             self.sharing._averaging(averaging_deque)
             logging.debug("Finished averaging")
+
+            # Update with previously-computed model gradients (D-PSGD)
+            self.trainer.train(self.dataset, grads=model_grads)
 
             logging.debug("resetting optimizer")
             if self.reset_optimizer:
