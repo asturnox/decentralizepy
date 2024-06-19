@@ -2,7 +2,6 @@ import numpy as np
 
 from decentralizepy.sharing.Sharing import Sharing
 from decentralizepy.graphs.MobilityGraph import MobilityGraph
-from scipy.special import softmax
 
 import logging
 
@@ -69,6 +68,16 @@ class MobilityAwareSharing(Sharing):
         self.alpha = alpha
         self.velocity_map = {node.uid: node.velocity for node in graph.nodes}
 
+    def averaging_weights(self, dv_lst):
+        N = len(dv_lst)
+        x = np.array(dv_lst)
+        norm_x = x / np.sum(x)
+
+        logging.info("norm_x: {}".format(norm_x))
+        w = (1 / N) + (self.alpha * (norm_x - (1/N)))
+        logging.info("w: {}".format(w))
+        return w
+
     def _averaging(self, peer_deques):
         if len(peer_deques) == 0:
             self.model.load_state_dict(self.model.state_dict())
@@ -80,7 +89,6 @@ class MobilityAwareSharing(Sharing):
         for i, n in enumerate(peer_deques):
             known_velocity_total += self.velocity_map[n]
         known_velocity_avg = known_velocity_total / (len(peer_deques) + 1)
-
 
         self.received_this_round = 0
         with torch.no_grad():
@@ -105,21 +113,20 @@ class MobilityAwareSharing(Sharing):
                 )
                 data = self.deserialized_model(data)
 
-                # dv = self.alpha * (self.velocity_map[n])
                 dv = self.velocity_map[n]
                 data_lst.append(data)
                 dv_lst.append(dv)
 
-            # norm_dv = softmax(dv_lst)
-            norm_dv = np.array(dv_lst) / np.sum(dv_lst)
-            data_dv = zip(data_lst, norm_dv)
+            w = self.averaging_weights(dv_lst)
+            data_w = zip(data_lst, w)
 
-            logging.info("Averaging model")
+            logging.info("Averaging model APSDPOADQWPO")
+            logging.info("alpha: {}".format(self.alpha))
             logging.info("dvs: {}".format(dv_lst))
-            logging.info("norm_dv: {}".format(norm_dv))
-            logging.info("data_dv: {}".format(data_dv))
+            logging.info("w: {}".format(w))
+            logging.info("data_w: {}".format(data_w))
 
-            for data, weight in data_dv:
+            for data, weight in data_w:
                 for key, value in data.items():
                     if key in total:
                         total[key] += value * weight
