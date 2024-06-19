@@ -1,0 +1,15 @@
+gcloud compute instances create rnode \
+    --project=research-project-123 \
+    --zone=europe-west1-c \
+    --machine-type=c2-standard-30 \
+    --network-interface=network-tier=PREMIUM,stack-type=IPV4_ONLY,subnet=default \
+    --maintenance-policy=MIGRATE \
+    --provisioning-model=STANDARD \
+    --service-account=315007829968-compute@developer.gserviceaccount.com \
+    --scopes=https://www.googleapis.com/auth/devstorage.read_only,https://www.googleapis.com/auth/logging.write,https://www.googleapis.com/auth/monitoring.write,https://www.googleapis.com/auth/servicecontrol,https://www.googleapis.com/auth/service.management.readonly,https://www.googleapis.com/auth/trace.append \
+    --create-disk=boot=yes,device-name=rnode,image=projects/debian-cloud/global/images/debian-12-bookworm-v20240515,mode=rw,size=50,type=projects/research-project-123/zones/europe-west1-c/diskTypes/pd-ssd \
+    --no-shielded-secure-boot \
+    --shielded-vtpm \
+    --shielded-integrity-monitoring \
+    --labels=goog-ec-src=vm_add-gcloud \
+    --reservation-affinity=any
