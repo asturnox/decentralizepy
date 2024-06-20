@@ -85,16 +85,10 @@ class MobilityAwareSharing(Sharing):
             self.communication_round += 1
             return
 
-        known_velocity_total = self.velocity_map[self.uid]
-        for i, n in enumerate(peer_deques):
-            known_velocity_total += self.velocity_map[n]
-        known_velocity_avg = known_velocity_total / (len(peer_deques) + 1)
-
         self.received_this_round = 0
         with torch.no_grad():
             total = dict()
 
-            # own_dv = self.alpha * (self.velocity_map[self.uid])
             own_dv = self.velocity_map[self.uid]
             own_data = self.model.state_dict()
 
@@ -120,7 +114,7 @@ class MobilityAwareSharing(Sharing):
             w = self.averaging_weights(dv_lst)
             data_w = zip(data_lst, w)
 
-            logging.info("Averaging model APSDPOADQWPO")
+            logging.info("Averaging model")
             logging.info("alpha: {}".format(self.alpha))
             logging.info("dvs: {}".format(dv_lst))
             logging.info("w: {}".format(w))
