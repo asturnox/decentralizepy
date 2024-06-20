@@ -27,6 +27,7 @@ run_experiment() {
     sed -i'' -e "s/^alpha=.*/alpha=${alpha}/" config.ini
     sync
 
+    ./run_decentralized.sh dynamic_48_0_0.txt $procs_per_machine $iterations $test_after
     ./run_decentralized.sh dynamic_48_0_05.txt $procs_per_machine $iterations $test_after
     ./run_decentralized.sh dynamic_48_0_2.txt $procs_per_machine $iterations $test_after
     ./run_decentralized.sh dynamic_48_0_4.txt $procs_per_machine $iterations $test_after
@@ -35,15 +36,15 @@ run_experiment() {
     ./run_decentralized.sh dynamic_48_1_0.txt $procs_per_machine $iterations $test_after
 }
 
-run_experiment 0.2
+run_experiment 0.1
 
-run_experiment 0.6
+run_experiment 0.2
 
 run_experiment 0.4
 
-run_experiment 0.8
+run_experiment 0.6
 
-# run_experiment ;
+run_experiment 0.8
 
 # Shutdown
 sudo shutdown -h now
