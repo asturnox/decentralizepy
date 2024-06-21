@@ -41,10 +41,10 @@ run_experiment() {
 }
 
 run_experiments() {
-    run_experiment 0.1
-    # run_experiment 0.2
-    run_experiment 0.3
-    # run_experiment 0.4
+    # run_experiment 0.1
+    run_experiment 0.2
+    # run_experiment 0.3
+    run_experiment 0.4
 }
 
 run_experiments
