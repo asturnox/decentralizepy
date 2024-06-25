@@ -1,3 +1,42 @@
+============================================================================================================
+Exploring the Impact of Client Mobility on Decentralized Federated Learning Systems
+============================================================================================================
+
+| This repository contains the code for the paper "Exploring the Impact of Client Mobility on Decentralized Federated Learning Systems".
+|  
+| The code is built as an extension of the DecentralizePy framework (original README below).
+| 
+| This work was part of the `2024 CSE3300 Research Project at TU Delft <https://github.com/TU-Delft-CSE/Research-Project>`_.
+|
+
+The code is organized as follows:
+
+* ``.saved_experiments`` contains the results of the experiments conducted in the paper.
+
+  * Each experiment class has its own folder, with subdirectories for each experiment run.
+
+  * Each experiment run has its own folder for its configuration and results in ``[experiment*name]/machine0``.
+
+    * Configuration for the run is stored in the ``config.ini`` file
+
+    * The initial graph used (along with its seed) is stored in a ``dynamic_*_.txt`` file
+
+* Experiments can be run by using the ``tutorial`` directory, which the ``run_decentralized.sh`` and ``config.ini`` files
+
+  * ``_submit/deploy.sh`` is a helper script that was used to run varying experiments with different configurations.
+
+* ``src/decentralizepy`` contains the extension to DecentralizePy that was used for the paper. Relevant files include
+
+  * ``graphs/MobilityGraph.py``
+
+  * ``graphs/MobilityNode.py``
+
+  * ``node/PeerSamplerDynamic.py``
+
+  * ``sharing/MobilityAwareSharing.py``
+
+* ``saved_figures`` contains figures used as well as extracted data from experiments used in the paper. These were obtained by running the ``plot_experiments.ipynb``, ``compare_experiments.ipynb``, and ``plot_graphs.ipynb`` notebooks.
+
 .. image:: https://upload.wikimedia.org/wikipedia/commons/f/f4/Logo_EPFL.svg
    :alt: EPFL logo
    :width: 75px
